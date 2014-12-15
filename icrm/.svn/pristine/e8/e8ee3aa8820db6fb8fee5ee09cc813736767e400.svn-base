@@ -1,0 +1,23 @@
+/*表格单元格内容超出后省略号显示*/
+table { table-layout: fixed; width: 100%; }
+td { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.edit { display: inline-table; width: 16px; height: 16px; text-align: center; }
+/*各类图标*/
+.delete,.detail,.arrow_down,.arrow_up,.add_more{ display: inline-table; width: 16px; height: 16px; text-align: center; outline:none;}
+.delete:hover,.detail:hover,.arrow_down:hover,.arrow_up:hover,.add_more:hover{ text-decoration:none;}
+.delete { background: url(../images2/doc-error.png) no-repeat center 0; }
+.detail { width: 20px; height: 20px; background: url(../images2/page_deatil.png) no-repeat center 0; }
+.arrow_down { background: url(../images2/arrow_down.png) no-repeat center 0; }
+.arrow_up { background: url(../images2/arrow_up.png) no-repeat center 0;}
+.add_more {background: url(../images2/doc-add.png) no-repeat center 0; }
+
+.trigger { border: #999 1px solid; height: 20px; background: #fff url(../images2/zoom.png) no-repeat 127px 4px; }
+.operate{ height:16px; padding:5px 0 0;}
+
+/**/
+input[readonly="readonly"] { background-color: #DCD7E2; }
+.jquery-msgbox-alert { background: url("../images2/msg.alert.png") no-repeat scroll rgba(0, 0, 0, 0); }
+.jquery-msgbox-info { background: url("../images2/msg.info.png") no-repeat scroll  rgba(0, 0, 0, 0); }
+.jquery-msgbox-error { background: url("../images2/msg.error.png") no-repeat scroll  rgba(0, 0, 0, 0); }
+.jquery-msgbox-prompt { background: url("../images2/msg.question.png") no-repeat scroll  rgba(0, 0, 0, 0); }
+.jquery-msgbox-confirm { background: url("../images2/msg.confirm.png") no-repeat scroll  rgba(0, 0, 0, 0); }

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.rbac.position.mapper.PositionMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.rbac.position.domain.Position" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="DATE" />
+    <result column="LAST_PERSON" property="lastPerson" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="DATE" />
+    <result column="POS_NAME" property="posName" jdbcType="VARCHAR" />
+    <result column="POS_TYPE" property="posType" jdbcType="DECIMAL" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <result column="POS_DESC" property="posDesc" jdbcType="VARCHAR" />
+    <result column="PAR_POS_ID" property="parPosId" jdbcType="VARCHAR" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, CREATE_PERSON, CREATE_DATE, LAST_PERSON, LAST_DATE, POS_NAME, POS_TYPE, ORG_ID, 
+    POS_DESC, PAR_POS_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+     select p.*,o.org_name
+    from TPOSITION p ,torganise o
+    where p.org_id = o.row_id(+)
+    and p.ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TPOSITION
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.rbac.position.domain.Position" >
+    insert into TPOSITION (ROW_ID, CREATE_PERSON, CREATE_DATE, 
+      LAST_PERSON, LAST_DATE, POS_NAME, 
+      POS_TYPE, ORG_ID, POS_DESC, 
+      PAR_POS_ID)
+    values (#{rowId,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, 
+      #{lastPerson,jdbcType=VARCHAR}, #{lastDate,jdbcType=DATE}, #{posName,jdbcType=VARCHAR}, 
+      #{posType,jdbcType=DECIMAL}, #{orgId,jdbcType=VARCHAR}, #{posDesc,jdbcType=VARCHAR}, 
+      #{parPosId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.rbac.position.domain.Position" >
+    insert into TPOSITION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="posName != null" >
+        POS_NAME,
+      </if>
+      <if test="posType != null" >
+        POS_TYPE,
+      </if>
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+      <if test="posDesc != null" >
+        POS_DESC,
+      </if>
+      <if test="parPosId != null" >
+        PAR_POS_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="lastPerson != null" >
+        #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=DATE},
+      </if>
+      <if test="posName != null" >
+        #{posName,jdbcType=VARCHAR},
+      </if>
+      <if test="posType != null" >
+        #{posType,jdbcType=DECIMAL},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="posDesc != null" >
+        #{posDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parPosId != null" >
+        #{parPosId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.rbac.position.domain.Position" >
+    update TPOSITION
+    <set >
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=DATE},
+      </if>
+      <if test="posName != null" >
+        POS_NAME = #{posName,jdbcType=VARCHAR},
+      </if>
+      <if test="posType != null" >
+        POS_TYPE = #{posType,jdbcType=DECIMAL},
+      </if>
+      <if test="orgId != null" >
+        ORG_ID = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="posDesc != null" >
+        POS_DESC = #{posDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parPosId != null" >
+        PAR_POS_ID = #{parPosId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.rbac.position.domain.Position" >
+    update TPOSITION
+    set CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=DATE},
+      LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      LAST_DATE = #{lastDate,jdbcType=DATE},
+      POS_NAME = #{posName,jdbcType=VARCHAR},
+      POS_TYPE = #{posType,jdbcType=DECIMAL},
+      ORG_ID = #{orgId,jdbcType=VARCHAR},
+      POS_DESC = #{posDesc,jdbcType=VARCHAR},
+      PAR_POS_ID = #{parPosId,jdbcType=VARCHAR}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getPositionTree" resultMap="BaseResultMap" parameterType="hashmap" >
+    select 
+    <include refid="Base_Column_List" />
+    from TPOSITION
+    where par_pos_id = #{parPosId}
+      <if test="posName != null" >
+        and POS_NAME like '%${posName}%'
+      </if>
+      <if test="posType != null" >
+        and POS_TYPE = #{posType}
+      </if>
+      <if test="posDesc != null" >
+        and POS_DESC = '%${posDesc}%'
+      </if>
+  </select>
+  
+  <sql id="select_sql">
+  	select 
+    	p.*,o.org_name
+      from tposition p, torganise o
+	 where p.org_id = o.row_id(+)
+    <if test="domain != null" >
+       <if test="domain.parPosId != null" >
+	        and  par_pos_id = #{domain.parPosId}
+	      </if>
+	      <if test="domain.posType != null" >
+	        and POS_TYPE like = #{domain.posType}
+	      </if>
+	      <if test="domain.posName != null" >
+	        and POS_NAME like '%${domain.posName}%'
+	      </if>
+      </if>
+  </sql>
+  <select id="getPageList" resultMap="BaseResultMap" parameterType="hashmap" >
+    <include refid="com.zjhcsoft.common.mapper.PageMapper.PagePre" />
+    <include refid="select_sql" />
+    <include refid="com.zjhcsoft.common.mapper.PageMapper.PageEnd" />
+  </select>
+  
+  <select id="getPageCount" resultType="long" parameterType="hashmap" >
+    <include refid="com.zjhcsoft.common.mapper.PageMapper.PageCountPre" />
+    <include refid="select_sql" />
+    <include refid="com.zjhcsoft.common.mapper.PageMapper.PageCountEnd" />
+  </select>
+  
+  <insert id="insertPositionRoles" parameterType="hashmap" >
+    insert into tposition_role
+	  (row_id, position_id, role_id)
+	  select sys_guid(), #{position_id}, r.row_id
+	    from trole r
+	   where r.row_id in 
+	   <foreach collection="roleids" item="id" open="(" separator="," close=")">
+	   		#{id}
+	   </foreach>
+  </insert>
+  
+  <delete id="deletePositionRoles" parameterType="hashmap" >
+        delete tposition_role tp 
+        	where tp.position_id = #{position_id}
+  </delete>
+</mapper>

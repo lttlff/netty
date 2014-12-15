@@ -1,0 +1,51 @@
+package com.zjhcsoft.rbac.organise.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.zjhcsoft.rbac.organise.domain.Organise;
+import com.zjhcsoft.rbac.organise.domain.OrganiseNode;
+import com.zjhcsoft.rbac.organise.mapper.OrganiseMapper;
+import com.zjhcsoft.rpc.context.impl.Request;
+
+/** 
+ * @date 2014-6-5 下午04:30:58
+ * @Title: OrganiseService.java 
+ * @author lff
+ */
+@Service
+public class OrganiseService {
+	@Autowired
+	OrganiseMapper organiseMapper;
+	/**
+	 * 得到组织树
+	 * @date 2014-6-5 下午05:25:32
+	 * @author lff
+	 * @return
+	 */
+	public List<OrganiseNode> getOrganiseTree(){
+		Map<Object, Object> map = Request.getAttributes();
+		
+		List<Organise> list = organiseMapper.getOrganiseTreeByMap(map);
+		List<OrganiseNode> nodeList = new ArrayList<OrganiseNode>();
+		if(list !=null && list.size()>0){
+			for(Organise domain : list){
+				OrganiseNode node = new OrganiseNode();
+				node.setDomain(domain);
+				node.setId(domain.getRowId());
+				node.setText(domain.getOrgName());
+//				node.setParent(domain.getParOrgId());
+				if(domain.getLeafFlg().equals(1)){
+					node.setChildren(false);
+					node.setType("file");
+				}
+				nodeList.add(node);
+			}
+		}
+		return nodeList;
+	}
+}

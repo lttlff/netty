@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.dynamic.mapper.SFieldDefMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.dynamic.domain.SFieldDef" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="field_code" property="fieldCode" jdbcType="VARCHAR" />
+    <result column="field_name" property="fieldName" jdbcType="VARCHAR" />
+    <result column="field_type" property="fieldType" jdbcType="VARCHAR" />
+    <result column="field_desc" property="fieldDesc" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, field_code, field_name, field_type, field_desc ,status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_field_def
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from s_field_def
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.dynamic.domain.SFieldDef" >
+    insert into s_field_def (id, field_code, field_name, 
+      field_type, field_desc, status)
+    values (#{id,jdbcType=VARCHAR}, #{fieldCode,jdbcType=VARCHAR}, #{fieldName,jdbcType=VARCHAR}, 
+      #{fieldType,jdbcType=VARCHAR}, #{fieldDesc,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.dynamic.domain.SFieldDef" >
+    insert into s_field_def
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fieldCode != null" >
+        field_code,
+      </if>
+      <if test="fieldName != null" >
+        field_name,
+      </if>
+      <if test="fieldType != null" >
+        field_type,
+      </if>
+      <if test="fieldDesc != null" >
+        field_desc,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldCode != null" >
+        #{fieldCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null" >
+        #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldType != null" >
+        #{fieldType,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldDesc != null" >
+        #{fieldDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.dynamic.domain.SFieldDef" >
+    update s_field_def
+    <set >
+      <if test="fieldCode != null" >
+        field_code = #{fieldCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null" >
+        field_name = #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldType != null" >
+        field_type = #{fieldType,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldDesc != null" >
+        field_desc = #{fieldDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.dynamic.domain.SFieldDef" >
+    update s_field_def
+    set field_code = #{fieldCode,jdbcType=VARCHAR},
+      field_name = #{fieldName,jdbcType=VARCHAR},
+      field_type = #{fieldType,jdbcType=VARCHAR},
+      field_desc = #{fieldDesc,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+   <select id="selectAllEffective" resultMap="BaseResultMap">
+    select *
+    from s_field_def where status='1'
+  </select>
+  
+</mapper>

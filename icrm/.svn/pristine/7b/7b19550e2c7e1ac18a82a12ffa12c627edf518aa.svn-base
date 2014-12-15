@@ -1,0 +1,155 @@
+package com.zjhcsoft.rbac.organise.service;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.zjhcsoft.common.mapper.SeqGeneratorMapper;
+import com.zjhcsoft.common.util.UUIDGenerator;
+import com.zjhcsoft.rbac.organise.domain.Organise;
+import com.zjhcsoft.rbac.organise.domain.OrganiseNode;
+import com.zjhcsoft.rbac.organise.mapper.OrganiseMapper;
+import com.zjhcsoft.rpc.context.impl.Request;
+
+/**
+ * @date 2014-6-5 下午04:30:58
+ * @Title: OrganiseService.java
+ * @author lff
+ */
+@Service
+public class OrganiseService {
+	@Autowired
+	OrganiseMapper organiseMapper;
+
+	@Autowired
+	private SeqGeneratorMapper seqGeneratorMapper;
+
+	/**
+	 * 得到组织树
+	 * 
+	 * @date 2014-6-5 下午05:25:32
+	 * @author lff
+	 * @return
+	 */
+	public List<OrganiseNode> getOrganiseTree() {
+		Map<Object, Object> map = Request.getAttributes();
+
+		List<Organise> list = organiseMapper.getOrganiseTreeByMap(map);
+		List<OrganiseNode> nodeList = new ArrayList<OrganiseNode>();
+		if (list != null && list.size() > 0) {
+			for (Organise domain : list) {
+				OrganiseNode node = new OrganiseNode();
+				node.setDomain(domain);
+				node.setId(domain.getRowId());
+				node.setText(domain.getOrgName());
+				// node.setParent(domain.getParOrgId());
+				if (domain.getLeafFlg().equals(1)) {
+					node.setChildren(false);
+					node.setType("file");
+				}
+				nodeList.add(node);
+			}
+		}
+		return nodeList;
+	}
+
+	public List<Organise> getPageList() {
+		Organise domain = (Organise) Request.getAttribute("domain");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("domain", domain);
+		map.put("start", Request.getAttribute("start"));
+		map.put("limit", Request.getAttribute("limit"));
+		return organiseMapper.getPageList(map);
+	}
+
+	public long getPageCount() {
+		Organise domain = (Organise) Request.getAttribute("domain");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("domain", domain);
+		return organiseMapper.getPageCount(map);
+	}
+
+	public Organise getById() {
+		String rowId = (String) Request.getAttribute("id");
+		return organiseMapper.selectByPrimaryKey(rowId);
+	}
+
+	public void updateOrganise(Organise organise) {
+		organise.setLastDate(new Date());
+		organise.setLastPerson("");
+		organiseMapper.updateByPrimaryKeySelective(organise);
+	}
+	/**
+	 * 修改
+	 * @date 2014-6-16 下午01:59:25
+	 * @author lff
+	 */
+	public void modifyOrganise() throws RuntimeException{
+		Organise organise = (Organise) Request.getAttribute("organise");
+		organise.setOrgPath(organise.getOrgPath().substring(0,
+				organise.getOrgPath().lastIndexOf("\\"))
+				+ "\\"+organise.getOrgName());
+		this.updateOrganise(organise);
+	}
+
+	/**
+	 * 添加组织，子节点
+	 * 
+	 * @date 2014-6-16 上午11:25:10
+	 * @author lff
+	 */
+	public void addOrganise() {
+		Organise organise = (Organise) Request.getAttribute("organise");
+		if (!"-1".equals(organise.getParOrgId())) {
+			// 更新父节点不是叶子节点
+			Organise parOrg = organiseMapper.selectByPrimaryKey(organise
+					.getParOrgId());
+			organise.setOrgLevel(parOrg.getOrgLevel() + 1);
+			organise.setOrgPath(parOrg.getOrgPath() + "\\"
+					+ organise.getOrgName());
+			if (parOrg.getLeafFlg() == 1) {
+				parOrg.setLeafFlg(0);
+				this.updateOrganise(parOrg);
+			}
+		}
+		this.insertOrganise(organise);
+	}
+
+	public void insertOrganise(Organise organise) {
+		organise.setCreateDate(new Date());
+		organise.setCreatePerson("");
+		organise.setLastDate(new Date());
+		organise.setLastPerson("");
+		organise.setOrgSts(0);
+		organise.setRowId(UUIDGenerator.getUUID());
+		organise.setOrgCode(seqGeneratorMapper
+				.getValueBySeq("ORGANISE_CODE_SEQ"));
+		organise.setLeafFlg(1);
+		organiseMapper.insertSelective(organise);
+	}
+
+	public void deleteLogicList() {
+		String idsStr = (String) Request.getAttribute("ids");
+		if (StringUtils.isNotEmpty(idsStr)) {
+			String[] ids = idsStr.split(",");
+			for (String id : ids) {
+				this.deleteLogic(id);
+			}
+		}
+	}
+
+	public void deleteLogic(String rowId) {
+		Organise organise = new Organise();
+		organise.setOrgSts(1);
+		organise.setLastDate(new Date());
+		organise.setLastPerson("");
+		organise.setRowId(rowId);
+		organiseMapper.updateByPrimaryKeySelective(organise);
+	}
+}

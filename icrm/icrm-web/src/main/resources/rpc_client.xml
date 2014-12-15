@@ -1,0 +1,10 @@
+<rpc_client>
+	<protocols>		
+		<protocol transport_protocol="tcp" data_protocol="HessianTcpNIO"
+			interfaceClassName="com.zjhcsoft.rpc.tcp.protocol.TcpProtocol"
+			className="com.zjhcsoft.rpc.tcp.protocol.hessian.HessianTcpNIOProtocol"
+			code="">
+			<param name="key2" value="value2" />
+		</protocol>
+	</protocols>
+</rpc_client>

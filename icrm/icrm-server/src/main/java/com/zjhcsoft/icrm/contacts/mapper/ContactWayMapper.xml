@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.contacts.mapper.ContactWayMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.contacts.domain.ContactWay" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <result column="CONTACTS_ID" property="contactsId" jdbcType="VARCHAR" />
+    <result column="CONTACT_TYPE" property="contactType" jdbcType="INTEGER" />
+    <result column="CONTACT_INFO" property="contactInfo" jdbcType="VARCHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, CONTACTS_ID, CONTACT_TYPE, CONTACT_INFO, REMARKS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_contact_way
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from crm_contact_way
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.contacts.domain.ContactWay" >
+    insert into crm_contact_way (ROW_ID, CONTACTS_ID, CONTACT_TYPE, 
+      CONTACT_INFO, REMARKS)
+    values (#{rowId,jdbcType=VARCHAR}, #{contactsId,jdbcType=VARCHAR}, #{contactType,jdbcType=INTEGER}, 
+      #{contactInfo,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.contacts.domain.ContactWay" >
+    insert into crm_contact_way
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="contactsId != null" >
+        CONTACTS_ID,
+      </if>
+      <if test="contactType != null" >
+        CONTACT_TYPE,
+      </if>
+      <if test="contactInfo != null" >
+        CONTACT_INFO,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsId != null" >
+        #{contactsId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactType != null" >
+        #{contactType,jdbcType=INTEGER},
+      </if>
+      <if test="contactInfo != null" >
+        #{contactInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.contacts.domain.ContactWay" >
+    update crm_contact_way
+    <set >
+      <if test="contactsId != null" >
+        CONTACTS_ID = #{contactsId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactType != null" >
+        CONTACT_TYPE = #{contactType,jdbcType=INTEGER},
+      </if>
+      <if test="contactInfo != null" >
+        CONTACT_INFO = #{contactInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.contacts.domain.ContactWay" >
+    update crm_contact_way
+    set CONTACTS_ID = #{contactsId,jdbcType=VARCHAR},
+      CONTACT_TYPE = #{contactType,jdbcType=INTEGER},
+      CONTACT_INFO = #{contactInfo,jdbcType=VARCHAR},
+      REMARKS = #{remarks,jdbcType=VARCHAR}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getContactWayListByContactsId"
+  	resultMap="BaseResultMap"
+  >
+  
+  	select <include refid="Base_Column_List"/>
+	from crm_contact_way a
+	where a.contacts_id = #{contactsId,jdbcType=VARCHAR}
+  
+  </select>
+  
+   <delete id="deleteByContactsId" parameterType="java.lang.String" >
+    delete from crm_contact_way
+    where CONTACTS_ID = #{contactsId,jdbcType=VARCHAR}
+  </delete>
+  
+  
+  
+</mapper>

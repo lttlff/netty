@@ -1,0 +1,62 @@
+package com.zjhcsoft.rbac.organise.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.zjhcsoft.common.util.AppConstant;
+import com.zjhcsoft.common.util.JsonUtil;
+import com.zjhcsoft.rbac.organise.domain.OrganiseNode;
+import com.zjhcsoft.rbac.user.domain.User;
+import com.zjhcsoft.rpc.RequestDeployRoute;
+import com.zjhcsoft.rpc.context.impl.ResponseContext;
+
+/**
+ * 组织部门
+ * 
+ * @date 2014-6-10 上午11:33:48
+ * @Title: OrganiseController.java
+ * @author lff
+ */
+@Controller
+@RequestMapping("/organise")
+public class OrganiseController {
+	@Autowired
+	JsonUtil jsonUtil;
+	
+	private String organiseService = "organiseService";
+	/**
+	 * 组织树json
+	 * @date 2014-6-10 下午02:17:09
+	 * @author lff
+	 * @param modelMap
+	 * @param parOrgId
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping("/getOrganiseTree")
+	public void getOrganiseTree(ModelMap modelMap, String parOrgId,
+			HttpServletRequest request, HttpServletResponse response) {
+		Map<Object, Object> paramMap = new HashMap<Object, Object>();
+		paramMap.put("parOrgId", parOrgId);
+		ResponseContext result = RequestDeployRoute.call(AppConstant.APP1,
+				organiseService, "getOrganiseTree", paramMap);
+		if(result!=null ){
+			List<OrganiseNode> nodeList = (List<OrganiseNode>)result.get();
+			jsonUtil.outJsonArray(nodeList, response);
+		}
+	}
+	
+	@RequestMapping("orgSelectWin")
+	public String orgSelectWin(HttpServletRequest request,User user) {
+		return "/rbac/organise/org_select_win";
+	}
+}

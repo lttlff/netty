@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.rbac.user.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.rbac.user.domain.User" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_PERSON" property="lastPerson" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="TIMESTAMP" />
+    <result column="REAL_NAME" property="realName" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="USER_PSW" property="userPsw" jdbcType="VARCHAR" />
+    <result column="DEPT_ID" property="deptId" jdbcType="VARCHAR" />
+    <result column="SALE_AREA" property="saleArea" jdbcType="VARCHAR" />
+    <result column="USER_STATE" property="userState" jdbcType="INTEGER" />
+    <result column="EXPIRE_DATE" property="expireDate" jdbcType="DATE" />
+    <result column="USER_TYPE" property="userType" jdbcType="INTEGER" />
+    <result column="USER_EMAIL" property="userEmail" jdbcType="VARCHAR" />
+    <result column="LAST_IP" property="lastIp" jdbcType="VARCHAR" />
+    <result column="GET_MESSAGE" property="getMessage" jdbcType="INTEGER" />
+    <result column="LAST_LOGIN_DATE" property="lastLoginDate" jdbcType="TIMESTAMP" />
+    <result column="LOGIN_COUNT" property="loginCount" jdbcType="INTEGER" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="COM_PHONE" property="comPhone" jdbcType="VARCHAR" />
+    <result column="MOBILE_PHONE" property="mobilePhone" jdbcType="VARCHAR" />
+    <result column="deptName" property="deptName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, CREATE_PERSON, CREATE_DATE, LAST_PERSON, LAST_DATE, REAL_NAME, USER_NAME, 
+    USER_PSW, DEPT_ID, SALE_AREA, USER_STATE, EXPIRE_DATE, USER_TYPE, USER_EMAIL, LAST_IP, 
+    GET_MESSAGE, LAST_LOGIN_DATE, LOGIN_COUNT, REMARK, COM_PHONE, MOBILE_PHONE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select t.*, o.org_name deptName from  tuser t, torganise o
+  	where t.dept_id = o.row_id
+  	and t.user_state !=1
+    and t.ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tuser
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.rbac.user.domain.User" >
+    insert into tuser (ROW_ID, CREATE_PERSON, CREATE_DATE, 
+      LAST_PERSON, LAST_DATE, REAL_NAME, 
+      USER_NAME, USER_PSW, DEPT_ID, 
+      SALE_AREA, USER_STATE, EXPIRE_DATE, 
+      USER_TYPE, USER_EMAIL, LAST_IP, 
+      GET_MESSAGE, LAST_LOGIN_DATE, LOGIN_COUNT, 
+      REMARK, COM_PHONE, MOBILE_PHONE
+      )
+    values (#{rowId,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastPerson,jdbcType=VARCHAR}, #{lastDate,jdbcType=TIMESTAMP}, #{realName,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{userPsw,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, 
+      #{saleArea,jdbcType=VARCHAR}, #{userState,jdbcType=INTEGER}, #{expireDate,jdbcType=DATE}, 
+      #{userType,jdbcType=INTEGER}, #{userEmail,jdbcType=VARCHAR}, #{lastIp,jdbcType=VARCHAR}, 
+      #{getMessage,jdbcType=INTEGER}, #{lastLoginDate,jdbcType=TIMESTAMP}, #{loginCount,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{comPhone,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.rbac.user.domain.User" >
+    insert into tuser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="realName != null" >
+        REAL_NAME,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="userPsw != null" >
+        USER_PSW,
+      </if>
+      <if test="deptId != null" >
+        DEPT_ID,
+      </if>
+      <if test="saleArea != null" >
+        SALE_AREA,
+      </if>
+      <if test="userState != null" >
+        USER_STATE,
+      </if>
+      <if test="expireDate != null" >
+        EXPIRE_DATE,
+      </if>
+      <if test="userType != null" >
+        USER_TYPE,
+      </if>
+      <if test="userEmail != null" >
+        USER_EMAIL,
+      </if>
+      <if test="lastIp != null" >
+        LAST_IP,
+      </if>
+      <if test="getMessage != null" >
+        GET_MESSAGE,
+      </if>
+      <if test="lastLoginDate != null" >
+        LAST_LOGIN_DATE,
+      </if>
+      <if test="loginCount != null" >
+        LOGIN_COUNT,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="comPhone != null" >
+        COM_PHONE,
+      </if>
+      <if test="mobilePhone != null" >
+        MOBILE_PHONE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPsw != null" >
+        #{userPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null" >
+        #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="saleArea != null" >
+        #{saleArea,jdbcType=VARCHAR},
+      </if>
+      <if test="userState != null" >
+        #{userState,jdbcType=INTEGER},
+      </if>
+      <if test="expireDate != null" >
+        #{expireDate,jdbcType=DATE},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="lastIp != null" >
+        #{lastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="getMessage != null" >
+        #{getMessage,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginDate != null" >
+        #{lastLoginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginCount != null" >
+        #{loginCount,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="comPhone != null" >
+        #{comPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.rbac.user.domain.User" >
+    update tuser
+    <set >
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realName != null" >
+        REAL_NAME = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPsw != null" >
+        USER_PSW = #{userPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null" >
+        DEPT_ID = #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="saleArea != null" >
+        SALE_AREA = #{saleArea,jdbcType=VARCHAR},
+      </if>
+      <if test="userState != null" >
+        USER_STATE = #{userState,jdbcType=INTEGER},
+      </if>
+      <if test="expireDate != null" >
+        EXPIRE_DATE = #{expireDate,jdbcType=DATE},
+      </if>
+      <if test="userType != null" >
+        USER_TYPE = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="userEmail != null" >
+        USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="lastIp != null" >
+        LAST_IP = #{lastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="getMessage != null" >
+        GET_MESSAGE = #{getMessage,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginDate != null" >
+        LAST_LOGIN_DATE = #{lastLoginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginCount != null" >
+        LOGIN_COUNT = #{loginCount,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="comPhone != null" >
+        COM_PHONE = #{comPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.rbac.user.domain.User" >
+    update tuser
+    set CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      REAL_NAME = #{realName,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_PSW = #{userPsw,jdbcType=VARCHAR},
+      DEPT_ID = #{deptId,jdbcType=VARCHAR},
+      SALE_AREA = #{saleArea,jdbcType=VARCHAR},
+      USER_STATE = #{userState,jdbcType=INTEGER},
+      EXPIRE_DATE = #{expireDate,jdbcType=DATE},
+      USER_TYPE = #{userType,jdbcType=INTEGER},
+      USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+      LAST_IP = #{lastIp,jdbcType=VARCHAR},
+      GET_MESSAGE = #{getMessage,jdbcType=INTEGER},
+      LAST_LOGIN_DATE = #{lastLoginDate,jdbcType=TIMESTAMP},
+      LOGIN_COUNT = #{loginCount,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      COM_PHONE = #{comPhone,jdbcType=VARCHAR},
+      MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectByUserNameAndPsw" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tuser
+    where user_state != 1 and user_name = #{userName,jdbcType=VARCHAR}
+    and	   upper(user_psw) = upper(#{userPsw,jdbcType=VARCHAR})
+  </select>
+  
+  
+  <select id="getList"  parameterType="map"	resultMap="BaseResultMap">
+  	<include refid="com.zjhcsoft.common.mapper.PageMapper.PagePre" />
+  	select t.*, o.org_name deptName from  tuser t, torganise o
+  	where t.dept_id = o.row_id
+  	and	t.user_state != 1
+  		<if
+  			test="domain.realName != null and domain.realName != ''">
+  			and real_name like #{domain.realName,jdbcType=VARCHAR}
+  		</if>
+  		<if
+  			test="domain.userName != null and domain.userName != ''">
+  			and user_name like #{domain.userName,jdbcType=VARCHAR}
+  		</if>
+  	<include refid="com.zjhcsoft.common.mapper.PageMapper.PageEnd" />
+  </select>
+
+  <select id="getTotalSize" resultType="long" parameterType="map">
+  
+  		select count(1) from tuser
+	    <where>
+	    	user_state != 1
+			    <if test="domain.realName != null and domain.realName != ''">
+			    	and  real_name like #{domain.realName,jdbcType=VARCHAR}
+			    </if>
+	  			<if test="domain.userName != null and domain.userName != ''">
+			    	and user_name like #{domain.userName,jdbcType=VARCHAR}
+			    </if>
+	    </where>
+  </select>
+  
+  <insert id="insertUserRoles" parameterType="hashmap" >
+    insert into tuser_role
+	  (row_id, user_id, role_id)
+	  select sys_guid(), #{user_id}, r.row_id
+	    from trole r
+	   where r.row_id in
+		<foreach collection="roleids" index="index" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	     and not exists (select *
+	            from tuser_role tr
+	           where tr.user_id = #{user_id}
+	             and tr.role_id = r.row_id)
+  </insert>
+  <delete id="deleteUserRoles" parameterType="hashmap" >
+    delete from tuser_role
+    	where user_id=#{user_id}
+  </delete>
+</mapper>

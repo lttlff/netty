@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.dynamic.mapper.SFormDefMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.dynamic.domain.SFormDef" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="form_code" property="formCode" jdbcType="VARCHAR" />
+    <result column="form_name" property="formName" jdbcType="VARCHAR" />
+    <result column="group_type" property="groupType" jdbcType="VARCHAR" />
+    <result column="group_num" property="groupNum" jdbcType="DECIMAL" />
+    <result column="data_url" property="dataUrl" jdbcType="VARCHAR" />
+    <result column="form_desc" property="formDesc" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, form_code, form_name, group_type, group_num, data_url, form_desc, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_form_def
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from s_form_def
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.dynamic.domain.SFormDef" >
+    insert into s_form_def (id, form_code, form_name, 
+      group_type, group_num, data_url, 
+      form_desc,status)
+    values (#{id,jdbcType=VARCHAR}, #{formCode,jdbcType=VARCHAR}, #{formName,jdbcType=VARCHAR}, 
+      #{groupType,jdbcType=VARCHAR}, #{groupNum,jdbcType=DECIMAL}, #{dataUrl,jdbcType=VARCHAR}, 
+      #{formDesc,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.dynamic.domain.SFormDef" >
+    insert into s_form_def
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="formCode != null" >
+        form_code,
+      </if>
+      <if test="formName != null" >
+        form_name,
+      </if>
+      <if test="groupType != null" >
+        group_type,
+      </if>
+      <if test="groupNum != null" >
+        group_num,
+      </if>
+      <if test="dataUrl != null" >
+        data_url,
+      </if>
+      <if test="formDesc != null" >
+        form_desc,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="formCode != null" >
+        #{formCode,jdbcType=VARCHAR},
+      </if>
+      <if test="formName != null" >
+        #{formName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupType != null" >
+        #{groupType,jdbcType=VARCHAR},
+      </if>
+      <if test="groupNum != null" >
+        #{groupNum,jdbcType=DECIMAL},
+      </if>
+      <if test="dataUrl != null" >
+        #{dataUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="formDesc != null" >
+        #{formDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.dynamic.domain.SFormDef" >
+    update s_form_def
+    <set >
+      <if test="formCode != null" >
+        form_code = #{formCode,jdbcType=VARCHAR},
+      </if>
+      <if test="formName != null" >
+        form_name = #{formName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupType != null" >
+        group_type = #{groupType,jdbcType=VARCHAR},
+      </if>
+      <if test="groupNum != null" >
+        group_num = #{groupNum,jdbcType=DECIMAL},
+      </if>
+      <if test="dataUrl != null" >
+        data_url = #{dataUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="formDesc != null" >
+        form_desc = #{formDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.dynamic.domain.SFormDef" >
+    update s_form_def
+    set form_code = #{formCode,jdbcType=VARCHAR},
+      form_name = #{formName,jdbcType=VARCHAR},
+      group_type = #{groupType,jdbcType=VARCHAR},
+      group_num = #{groupNum,jdbcType=DECIMAL},
+      data_url = #{dataUrl,jdbcType=VARCHAR},
+      form_desc = #{formDesc,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectAllEffective" resultMap="BaseResultMap">
+    select *
+    from s_form_def where status = '1'
+  </select>
+  
+</mapper>

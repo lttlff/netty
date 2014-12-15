@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.contacts.mapper.CommRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.contacts.domain.CommRecord" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_PERSON" property="lastPerson" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="TIMESTAMP" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="CONTACTS_ID" property="contactsId" jdbcType="VARCHAR" />
+    <result column="CONTACT_WAY" property="contactWay" jdbcType="INTEGER" />
+    <result column="CONTACT_TIME" property="contactTime" jdbcType="TIMESTAMP" />
+    <result column="CONTACT_COMMENT" property="contactComment" jdbcType="VARCHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, CREATE_PERSON, CREATE_DATE, LAST_PERSON, LAST_DATE, USER_ID, CONTACTS_ID, 
+    CONTACT_WAY, CONTACT_TIME, CONTACT_COMMENT, REMARKS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_comm_record
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from crm_comm_record
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.contacts.domain.CommRecord" >
+    insert into crm_comm_record (ROW_ID, CREATE_PERSON, CREATE_DATE, 
+      LAST_PERSON, LAST_DATE, USER_ID, 
+      CONTACTS_ID, CONTACT_WAY, CONTACT_TIME, 
+      CONTACT_COMMENT, REMARKS)
+    values (#{rowId,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastPerson,jdbcType=VARCHAR}, #{lastDate,jdbcType=TIMESTAMP}, #{userId,jdbcType=VARCHAR}, 
+      #{contactsId,jdbcType=VARCHAR}, #{contactWay,jdbcType=INTEGER}, #{contactTime,jdbcType=TIMESTAMP}, 
+      #{contactComment,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.contacts.domain.CommRecord" >
+    insert into crm_comm_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="contactsId != null" >
+        CONTACTS_ID,
+      </if>
+      <if test="contactWay != null" >
+        CONTACT_WAY,
+      </if>
+      <if test="contactTime != null" >
+        CONTACT_TIME,
+      </if>
+      <if test="contactComment != null" >
+        CONTACT_COMMENT,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsId != null" >
+        #{contactsId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactWay != null" >
+        #{contactWay,jdbcType=INTEGER},
+      </if>
+      <if test="contactTime != null" >
+        #{contactTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contactComment != null" >
+        #{contactComment,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.contacts.domain.CommRecord" >
+    update crm_comm_record
+    <set >
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsId != null" >
+        CONTACTS_ID = #{contactsId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactWay != null" >
+        CONTACT_WAY = #{contactWay,jdbcType=INTEGER},
+      </if>
+      <if test="contactTime != null" >
+        CONTACT_TIME = #{contactTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contactComment != null" >
+        CONTACT_COMMENT = #{contactComment,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.contacts.domain.CommRecord" >
+    update crm_comm_record
+    set CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      CONTACTS_ID = #{contactsId,jdbcType=VARCHAR},
+      CONTACT_WAY = #{contactWay,jdbcType=INTEGER},
+      CONTACT_TIME = #{contactTime,jdbcType=TIMESTAMP},
+      CONTACT_COMMENT = #{contactComment,jdbcType=VARCHAR},
+      REMARKS = #{remarks,jdbcType=VARCHAR}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <resultMap id="commRecordVOPageResultMap" type="com.zjhcsoft.icrm.contacts.vo.CommRecordVO" extends="BaseResultMap">
+  		<result property="contactsName"  column="contacts_name"/>
+  </resultMap>
+  <select id="getPageList" parameterType="map" resultMap="commRecordVOPageResultMap">
+  	<include refid="com.zjhcsoft.common.mapper.PageMapper.PagePre"/>
+		select a.*,b.contacts_name
+	    from CRM_COMM_RECORD a,crm_contacts b
+	    <where>
+	    	a.contacts_id = b.row_id
+		    <if test="domain.userId != null and domain.userId != ''">
+		    	and a.user_id like #{domain.userId,jdbcType=VARCHAR}
+		    </if>
+  			<if test="domain.contactsId != null and domain.contactsId != ''">
+		    	and a.CONTACTS_ID like #{domain.contactsId,jdbcType=VARCHAR}
+		    </if>
+  			<if test="domain.contactWay != null and domain.contactWay != ''">
+		    	and a.CONTACT_WAY = #{domain.contactWay,jdbcType=VARCHAR}
+		    </if>
+  			<if test="domain.contactsName != null and domain.contactsName != ''">
+		    	and b.CONTACTS_NAME like #{domain.contactsName,jdbcType=VARCHAR}
+		    </if>
+	    </where>
+	    order by a.create_date desc
+  	<include refid="com.zjhcsoft.common.mapper.PageMapper.PageEnd"/>
+  </select>
+  <select id="getTotalSize" parameterType="map">
+  		select count(1)
+	    from CRM_COMM_RECORD a,crm_contacts b
+	    <where>
+	    	a.contacts_id = b.row_id
+		    <if test="domain.userId != null and domain.userId != ''">
+		    	and a.user_id like #{domain.userId,jdbcType=VARCHAR}
+		    </if>
+  			<if test="domain.contactsId != null and domain.contactsId != ''">
+		    	and a.CONTACTS_ID like #{domain.contactsId,jdbcType=VARCHAR}
+		    </if>
+  			<if test="domain.contactWay != null and domain.contactWay != ''">
+		    	and a.CONTACT_WAY = #{domain.contactWay,jdbcType=VARCHAR}
+		    </if>
+  			<if test="domain.contactsName != null and domain.contactsName != ''">
+		    	and b.CONTACTS_NAME like #{domain.contactsName,jdbcType=VARCHAR}
+		    </if>
+	    </where>
+  </select>
+  
+  <select id="getCommRecordVOInfo" resultMap="commRecordVOPageResultMap" parameterType="java.lang.String">
+  		select 	a.*,b.contacts_name
+	    from 	CRM_COMM_RECORD a,crm_contacts b
+	    where 	a.contacts_id = b.row_id
+  		and		a.ROW_ID = #{rowId,jdbcType=VARCHAR}
+  		
+  </select>
+  
+  
+</mapper>

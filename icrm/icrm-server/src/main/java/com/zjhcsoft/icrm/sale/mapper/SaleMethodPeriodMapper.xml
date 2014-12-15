@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.sale.mapper.SaleMethodPeriodMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.sale.domain.SaleMethodPeriod" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_PERSON" property="lastPerson" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="TIMESTAMP" />
+    <result column="METHOD_ID" property="methodId" jdbcType="VARCHAR" />
+    <result column="PERIOD_ID" property="periodId" jdbcType="VARCHAR" />
+    <result column="STEP" property="step" jdbcType="INTEGER" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, CREATE_PERSON, CREATE_DATE, LAST_PERSON, LAST_DATE, METHOD_ID, PERIOD_ID, 
+    STEP, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_sale_method_period
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from crm_sale_method_period
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.sale.domain.SaleMethodPeriod" >
+    insert into crm_sale_method_period (ROW_ID, CREATE_PERSON, CREATE_DATE, 
+      LAST_PERSON, LAST_DATE, METHOD_ID, 
+      PERIOD_ID, STEP, REMARK
+      )
+    values (#{rowId,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastPerson,jdbcType=VARCHAR}, #{lastDate,jdbcType=TIMESTAMP}, #{methodId,jdbcType=VARCHAR}, 
+      #{periodId,jdbcType=VARCHAR}, #{step,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.sale.domain.SaleMethodPeriod" >
+    insert into crm_sale_method_period
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="methodId != null" >
+        METHOD_ID,
+      </if>
+      <if test="periodId != null" >
+        PERIOD_ID,
+      </if>
+      <if test="step != null" >
+        STEP,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="methodId != null" >
+        #{methodId,jdbcType=VARCHAR},
+      </if>
+      <if test="periodId != null" >
+        #{periodId,jdbcType=VARCHAR},
+      </if>
+      <if test="step != null" >
+        #{step,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.sale.domain.SaleMethodPeriod" >
+    update crm_sale_method_period
+    <set >
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="methodId != null" >
+        METHOD_ID = #{methodId,jdbcType=VARCHAR},
+      </if>
+      <if test="periodId != null" >
+        PERIOD_ID = #{periodId,jdbcType=VARCHAR},
+      </if>
+      <if test="step != null" >
+        STEP = #{step,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.sale.domain.SaleMethodPeriod" >
+    update crm_sale_method_period
+    set CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      METHOD_ID = #{methodId,jdbcType=VARCHAR},
+      PERIOD_ID = #{periodId,jdbcType=VARCHAR},
+      STEP = #{step,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,288 @@
+.ng-form-area {
+	display: block !important;
+	height: 330px;
+	margin-left: 40px;
+	overflow: hidden;
+	padding-top: 10px;
+	width: 324px;
+}
+
+.shake-area {
+	position: relative;
+}
+
+.enter-area {
+	position: relative;
+}
+
+.enter-item {
+	-moz-appearance: none;
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid #E6E6E6;
+	border-radius: 6px;
+	color: #333333;
+	display: block;
+	font-size: 14px;
+	font-weight: bold;
+	height: 20px;
+	line-height: 20px;
+	padding: 12px 10px;
+	width: 298px;
+}
+
+.enter-item:focus {
+	background: none repeat scroll 0 0 #FDFDFD;
+	box-shadow: 0 0 8px #EAEAEA inset;
+}
+
+.first-enter-item {
+	border-radius: 6px 6px 0 0;
+}
+
+.last-enter-item {
+	border-radius: 0 0 6px 6px;
+	margin-top: -1px;
+}
+
+.code-enter-item {
+	display: inline-block;
+	vertical-align: top;
+	width: 104px;
+}
+
+.code-img {
+	background: none repeat scroll 0 0 #CCCCCC;
+	border-radius: 6px;
+	display: inline-block;
+	height: 60px;
+	margin-right: 10px;
+	vertical-align: top;
+	width: 180px;
+}
+
+.error-ico {
+	background: none no-repeat scroll -60px -38px rgba(0, 0, 0, 0);
+	display: inline-block;
+	height: 14px;
+	margin-right: 6px;
+	vertical-align: middle;
+	width: 14px;
+}
+
+.error-msg {
+	color: #FF7448;
+	font-size: 14px;
+	vertical-align: middle;
+}
+
+.placeholder {
+	color: #C2C2C2;
+	display: inline-block;
+	font-size: 14px;
+	font-style: normal;
+	line-height: 20px;
+}
+
+.fadeOut {
+	color: #D7D7D7;
+}
+
+.placeholder,.error-tip {
+	left: 10px;
+	position: absolute;
+	top: 14px;
+}
+
+.placeholder {
+	left: 12px;
+}
+
+.error-tip {
+	background: none repeat scroll 0 0 #FFFFFF;
+	display: none;
+	height: 18px;
+	line-height: 16px;
+	width: 300px;
+}
+
+.img-code-area .error-tip {
+	width: 110px;
+}
+
+.error .error-tip {
+	display: block;
+}
+
+.error .placeholder {
+	display: none;
+}
+
+.img-code-area .placeholder,.img-code-area .error-tip {
+	left: 206px;
+}
+
+.ng-foot {
+	height: 18px;
+	margin-top: 16px;
+}
+
+.ng-link-area {
+	color: #999999;
+	float: right;
+	position: relative;
+	text-align: right;
+	width: 180px;
+}
+
+.ng-link-area a {
+	color: #999999;
+}
+
+.ng-link-area a:hover {
+	color: #FF7E00;
+}
+
+.third-area,.button {
+	-moz-appearance: none;
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid #E5E5E5;
+	border-radius: 6px;
+	color: #7C7C7C;
+	cursor: pointer;
+	display: block;
+	font-size: 16px;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	width: 320px;
+}
+
+.button:hover {
+	color: #333333;
+}
+
+.orange {
+	background: none repeat scroll 0 0 #FF7A4D;
+	border: 1px solid #FF7549;
+	color: #FFFFFF;
+}
+
+.orange:hover {
+	background: none repeat scroll 0 0 #FF936A;
+	border: 1px solid #FF936A;
+	color: #FFFFFF;
+}
+
+.orange:active {
+	background: none repeat scroll 0 0 #F6683B;
+	border: 1px solid #F6683B;
+	color: #FFFFFF;
+}
+
+.third-area {
+	line-height: 60px;
+	position: absolute;
+	right: 2px;
+	top: 34px;
+}
+
+.third-area a {
+	display: inline-block;
+	font-size: 0;
+	height: 28px;
+	margin: 0 4px;
+	overflow: hidden;
+	width: 28px;
+}
+
+.ta-qq {
+	background: none no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.ta-weibo {
+	background: none no-repeat scroll -30px 0 rgba(0, 0, 0, 0);
+}
+
+.ta-alipay {
+	background: none no-repeat scroll 0 -30px rgba(0, 0, 0, 0);
+}
+
+.ta-facebook {
+	background: none no-repeat scroll -30px -30px rgba(0, 0, 0, 0);
+}
+
+.third-area a.ta-facebook {
+	display: none;
+}
+
+.corner,.corner-inner {
+	border: 10px dotted rgba(0, 0, 0, 0);
+	height: 0;
+	overflow: hidden;
+	position: absolute;
+	right: 80px;
+	top: -20px;
+	width: 0;
+}
+
+.corner {
+	border-bottom: 10px solid #D6D6D6;
+}
+
+.corner-inner {
+	border-bottom: 9px solid #FFFFFF;
+	border-width: 9px;
+	right: 81px;
+	top: -18px;
+}
+
+.ng-cookie-area {
+	color: #999999;
+	cursor: pointer;
+	float: left;
+	vertical-align: middle;
+	width: 120px;
+}
+
+.checkbox {
+	background: none no-repeat scroll -60px -20px rgba(0, 0, 0, 0);
+	cursor: pointer;
+	display: inline-block;
+	height: 15px;
+	margin-right: 6px;
+	overflow: hidden;
+	vertical-align: middle;
+	width: 15px;
+}
+
+.checked {
+	background: none no-repeat scroll -60px 0 rgba(0, 0, 0, 0);
+}
+
+.shake-area,.code-enter-item {
+	margin-bottom: 16px;
+}
+
+.button {
+	margin: 16px 0 0;
+}
+
+.ta-qq,.ta-weibo,.ta-alipay,.ta-facebook,.checkbox,.checked,.error-ico {
+	background-image: url("/static/img/passport/sprite_all2.png");
+}
+
+.has_third .ta-alipay {
+	display: none;
+}
+
+.en .ng-cookie-area {
+	width: 110px;
+}
+
+.en .ng-link-area {
+	width: 210px;
+}
+
+.en a.ta-facebook,.zh_tw a.ta-facebook {
+	display: inline-block;
+}

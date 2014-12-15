@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.sale.mapper.SalePlanLogMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.sale.domain.SalePlanLog" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <result column="PLAN_ID" property="planId" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_PERSON" property="lastPerson" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="TIMESTAMP" />
+    <result column="PLAN_CODE" property="planCode" jdbcType="VARCHAR" />
+    <result column="PLAN_NAME" property="planName" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="PLAN_CONTRACT_OLD" property="planContractOld" jdbcType="DECIMAL" />
+    <result column="PLAN_NEW_CUST_OLD" property="planNewCustOld" jdbcType="INTEGER" />
+    <result column="PLAN_START_DATE_OLD" property="planStartDateOld" jdbcType="TIMESTAMP" />
+    <result column="PLAN_END_DATE_OLD" property="planEndDateOld" jdbcType="TIMESTAMP" />
+    <result column="PLAN_CONTRACT_NEW" property="planContractNew" jdbcType="DECIMAL" />
+    <result column="PLAN_NEW_CUST_NEW" property="planNewCustNew" jdbcType="INTEGER" />
+    <result column="PLAN_START_DATE_NEW" property="planStartDateNew" jdbcType="TIMESTAMP" />
+    <result column="PLAN_END_DATE_NEW" property="planEndDateNew" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_REASON" property="modifyReason" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, PLAN_ID, CREATE_PERSON, CREATE_DATE, LAST_PERSON, LAST_DATE, PLAN_CODE, PLAN_NAME, 
+    USER_ID, PLAN_CONTRACT_OLD, PLAN_NEW_CUST_OLD, PLAN_START_DATE_OLD, PLAN_END_DATE_OLD, 
+    PLAN_CONTRACT_NEW, PLAN_NEW_CUST_NEW, PLAN_START_DATE_NEW, PLAN_END_DATE_NEW, MODIFY_DATE, 
+    MODIFY_REASON
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_sale_plan_log
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from crm_sale_plan_log
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.sale.domain.SalePlanLog" >
+    insert into crm_sale_plan_log (ROW_ID, PLAN_ID, CREATE_PERSON, 
+      CREATE_DATE, LAST_PERSON, LAST_DATE, 
+      PLAN_CODE, PLAN_NAME, USER_ID, 
+      PLAN_CONTRACT_OLD, PLAN_NEW_CUST_OLD, PLAN_START_DATE_OLD, 
+      PLAN_END_DATE_OLD, PLAN_CONTRACT_NEW, PLAN_NEW_CUST_NEW, 
+      PLAN_START_DATE_NEW, PLAN_END_DATE_NEW, MODIFY_DATE, 
+      MODIFY_REASON)
+    values (#{rowId,jdbcType=VARCHAR}, #{planId,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{lastPerson,jdbcType=VARCHAR}, #{lastDate,jdbcType=TIMESTAMP}, 
+      #{planCode,jdbcType=VARCHAR}, #{planName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{planContractOld,jdbcType=DECIMAL}, #{planNewCustOld,jdbcType=INTEGER}, #{planStartDateOld,jdbcType=TIMESTAMP}, 
+      #{planEndDateOld,jdbcType=TIMESTAMP}, #{planContractNew,jdbcType=DECIMAL}, #{planNewCustNew,jdbcType=INTEGER}, 
+      #{planStartDateNew,jdbcType=TIMESTAMP}, #{planEndDateNew,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}, 
+      #{modifyReason,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.sale.domain.SalePlanLog" >
+    insert into crm_sale_plan_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="planId != null" >
+        PLAN_ID,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="planCode != null" >
+        PLAN_CODE,
+      </if>
+      <if test="planName != null" >
+        PLAN_NAME,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="planContractOld != null" >
+        PLAN_CONTRACT_OLD,
+      </if>
+      <if test="planNewCustOld != null" >
+        PLAN_NEW_CUST_OLD,
+      </if>
+      <if test="planStartDateOld != null" >
+        PLAN_START_DATE_OLD,
+      </if>
+      <if test="planEndDateOld != null" >
+        PLAN_END_DATE_OLD,
+      </if>
+      <if test="planContractNew != null" >
+        PLAN_CONTRACT_NEW,
+      </if>
+      <if test="planNewCustNew != null" >
+        PLAN_NEW_CUST_NEW,
+      </if>
+      <if test="planStartDateNew != null" >
+        PLAN_START_DATE_NEW,
+      </if>
+      <if test="planEndDateNew != null" >
+        PLAN_END_DATE_NEW,
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE,
+      </if>
+      <if test="modifyReason != null" >
+        MODIFY_REASON,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="planId != null" >
+        #{planId,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planCode != null" >
+        #{planCode,jdbcType=VARCHAR},
+      </if>
+      <if test="planName != null" >
+        #{planName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="planContractOld != null" >
+        #{planContractOld,jdbcType=DECIMAL},
+      </if>
+      <if test="planNewCustOld != null" >
+        #{planNewCustOld,jdbcType=INTEGER},
+      </if>
+      <if test="planStartDateOld != null" >
+        #{planStartDateOld,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planEndDateOld != null" >
+        #{planEndDateOld,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planContractNew != null" >
+        #{planContractNew,jdbcType=DECIMAL},
+      </if>
+      <if test="planNewCustNew != null" >
+        #{planNewCustNew,jdbcType=INTEGER},
+      </if>
+      <if test="planStartDateNew != null" >
+        #{planStartDateNew,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planEndDateNew != null" >
+        #{planEndDateNew,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyReason != null" >
+        #{modifyReason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.sale.domain.SalePlanLog" >
+    update crm_sale_plan_log
+    <set >
+      <if test="planId != null" >
+        PLAN_ID = #{planId,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planCode != null" >
+        PLAN_CODE = #{planCode,jdbcType=VARCHAR},
+      </if>
+      <if test="planName != null" >
+        PLAN_NAME = #{planName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="planContractOld != null" >
+        PLAN_CONTRACT_OLD = #{planContractOld,jdbcType=DECIMAL},
+      </if>
+      <if test="planNewCustOld != null" >
+        PLAN_NEW_CUST_OLD = #{planNewCustOld,jdbcType=INTEGER},
+      </if>
+      <if test="planStartDateOld != null" >
+        PLAN_START_DATE_OLD = #{planStartDateOld,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planEndDateOld != null" >
+        PLAN_END_DATE_OLD = #{planEndDateOld,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planContractNew != null" >
+        PLAN_CONTRACT_NEW = #{planContractNew,jdbcType=DECIMAL},
+      </if>
+      <if test="planNewCustNew != null" >
+        PLAN_NEW_CUST_NEW = #{planNewCustNew,jdbcType=INTEGER},
+      </if>
+      <if test="planStartDateNew != null" >
+        PLAN_START_DATE_NEW = #{planStartDateNew,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planEndDateNew != null" >
+        PLAN_END_DATE_NEW = #{planEndDateNew,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyReason != null" >
+        MODIFY_REASON = #{modifyReason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.sale.domain.SalePlanLog" >
+    update crm_sale_plan_log
+    set PLAN_ID = #{planId,jdbcType=VARCHAR},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      PLAN_CODE = #{planCode,jdbcType=VARCHAR},
+      PLAN_NAME = #{planName,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      PLAN_CONTRACT_OLD = #{planContractOld,jdbcType=DECIMAL},
+      PLAN_NEW_CUST_OLD = #{planNewCustOld,jdbcType=INTEGER},
+      PLAN_START_DATE_OLD = #{planStartDateOld,jdbcType=TIMESTAMP},
+      PLAN_END_DATE_OLD = #{planEndDateOld,jdbcType=TIMESTAMP},
+      PLAN_CONTRACT_NEW = #{planContractNew,jdbcType=DECIMAL},
+      PLAN_NEW_CUST_NEW = #{planNewCustNew,jdbcType=INTEGER},
+      PLAN_START_DATE_NEW = #{planStartDateNew,jdbcType=TIMESTAMP},
+      PLAN_END_DATE_NEW = #{planEndDateNew,jdbcType=TIMESTAMP},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_REASON = #{modifyReason,jdbcType=VARCHAR}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+</mapper>

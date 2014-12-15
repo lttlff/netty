@@ -1,0 +1,10 @@
+<div>
+	<label class="control-label" for="${name}">${label}</label>
+	<div class="controls">
+		<select name="${name}" id="${name}" >
+			#foreach($option in ${options})
+				<option value="${option.value}">$option.text</option>
+			#end
+        </select>
+    </div>
+</div>

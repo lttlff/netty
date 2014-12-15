@@ -1,0 +1,60 @@
+package com.zjhcsoft.icrm.customer.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.zjhcsoft.icrm.customer.domain.Addr;
+import com.zjhcsoft.icrm.customer.mapper.AddrMapper;
+
+@Service
+public class AddrService {
+	@Autowired
+	private AddrMapper addrMapper;
+
+	
+	public List getProvinceList(){
+		
+		
+		return null;
+	}
+	
+	
+	public List getCityByProv(){
+		
+		return null;
+	}
+	
+	public List getTownByCity(){
+		
+		return null;
+	}
+	
+	
+	
+	
+	public int deleteByPrimaryKey(String rowId) {
+		return addrMapper.deleteByPrimaryKey(rowId);
+	}
+
+	public int insert(Addr record) {
+		return addrMapper.insert(record);
+	}
+
+	public int insertSelective(Addr record) {
+		return addrMapper.insertSelective(record);
+	}
+
+	public Addr selectByPrimaryKey(String rowId) {
+		return addrMapper.selectByPrimaryKey(rowId);
+	}
+
+	public int updateByPrimaryKeySelective(Addr record) {
+		return addrMapper.updateByPrimaryKeySelective(record);
+	}
+
+	public int updateByPrimaryKey(Addr record) {
+		return addrMapper.updateByPrimaryKey(record);
+	}
+}

@@ -1,0 +1,30 @@
+package com.zjhcsoft.rbac.user.mapper;
+
+import java.util.List;
+import java.util.Map;
+
+import com.zjhcsoft.rbac.user.domain.User;
+
+public interface UserMapper {
+    int deleteByPrimaryKey(String rowId);
+
+    int insert(User record);
+
+    int insertSelective(User record);
+
+    User selectByPrimaryKey(String rowId);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
+    
+    List<User> getList(Map<String, Object> map);
+    
+    long getTotalSize(Map<String, Object> map);
+
+	User selectByUserNameAndPsw(Map<String, String> map);
+	
+	public void insertUserRoles(Map<String, Object> map);
+	
+	public void deleteUserRoles(Map<String, Object> map);
+}

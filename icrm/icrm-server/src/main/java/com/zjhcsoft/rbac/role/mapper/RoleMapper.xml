@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.rbac.role.mapper.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.rbac.role.domain.Role" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="DATE" />
+    <result column="LAST_PERSON" property="lastPerson" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="DATE" />
+    <result column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR" />
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+    <result column="ROLE_TYPE" property="roleType" jdbcType="DECIMAL" />
+    <result column="ROLE_DESC" property="roleDesc" jdbcType="VARCHAR" />
+    <result column="ROLE_STATE" property="roleState" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, CREATE_PERSON, CREATE_DATE, LAST_PERSON, LAST_DATE, ROLE_CODE, ROLE_NAME, 
+    ROLE_TYPE, ROLE_DESC, ROLE_STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TROLE
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TROLE
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.rbac.role.domain.Role" >
+    insert into TROLE (ROW_ID, CREATE_PERSON, CREATE_DATE, 
+      LAST_PERSON, LAST_DATE, ROLE_CODE, 
+      ROLE_NAME, ROLE_TYPE, ROLE_DESC, 
+      ROLE_STATE)
+    values (#{rowId,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, 
+      #{lastPerson,jdbcType=VARCHAR}, #{lastDate,jdbcType=DATE}, #{roleCode,jdbcType=VARCHAR}, 
+      #{roleName,jdbcType=VARCHAR}, #{roleType,jdbcType=DECIMAL}, #{roleDesc,jdbcType=VARCHAR}, 
+      #{roleState,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.rbac.role.domain.Role" >
+    insert into TROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="roleCode != null" >
+        ROLE_CODE,
+      </if>
+      <if test="roleName != null" >
+        ROLE_NAME,
+      </if>
+      <if test="roleType != null" >
+        ROLE_TYPE,
+      </if>
+      <if test="roleDesc != null" >
+        ROLE_DESC,
+      </if>
+      <if test="roleState != null" >
+        ROLE_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="lastPerson != null" >
+        #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=DATE},
+      </if>
+      <if test="roleCode != null" >
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null" >
+        #{roleType,jdbcType=DECIMAL},
+      </if>
+      <if test="roleDesc != null" >
+        #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="roleState != null" >
+        #{roleState,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.rbac.role.domain.Role" >
+    update TROLE
+    <set >
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=DATE},
+      </if>
+      <if test="roleCode != null" >
+        ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null" >
+        ROLE_TYPE = #{roleType,jdbcType=DECIMAL},
+      </if>
+      <if test="roleDesc != null" >
+        ROLE_DESC = #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="roleState != null" >
+        ROLE_STATE = #{roleState,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.rbac.role.domain.Role" >
+    update TROLE
+    set CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=DATE},
+      LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      LAST_DATE = #{lastDate,jdbcType=DATE},
+      ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+      ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      ROLE_TYPE = #{roleType,jdbcType=DECIMAL},
+      ROLE_DESC = #{roleDesc,jdbcType=VARCHAR},
+      ROLE_STATE = #{roleState,jdbcType=DECIMAL}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getPageList" resultMap="BaseResultMap" parameterType="map">
+  	<include refid="com.zjhcsoft.common.mapper.PageMapper.PagePre"/>
+	  	select 
+	    <include refid="Base_Column_List" />
+	    from trole
+	    <where>
+	    	role_state !=1
+			    <if test="domain.roleCode != null and domain.roleCode != ''">
+			    	and  role_code like '%${domain.roleCode}%'
+			    </if>
+	  			<if test="domain.roleName != null and domain.roleName != ''">
+			    	and role_name like '%${domain.roleName}%'
+			    </if>
+	  			<if test="domain.roleType != null">
+			    	and role_type = #{domain.roleType}
+			    </if>
+	  			<if test="domain.roleState != null">
+			    	and role_state = #{domain.roleState}
+			    </if>
+	    </where>
+  	<include refid="com.zjhcsoft.common.mapper.PageMapper.PageEnd"/>
+  </select>
+  
+  <select id="getTotalSize" resultType="long" parameterType="map">
+  
+  		select count(1) from trole
+	    <where>
+	    	role_state !=1
+			    <if test="domain.roleCode != null and domain.roleCode != ''">
+			    	and  role_code like '%${domain.roleCode}%'
+			    </if>
+	  			<if test="domain.roleName != null and domain.roleName != ''">
+			    	and role_name like '%${domain.roleName}%'
+			    </if>
+	  			<if test="domain.roleType != null">
+			    	and role_type = #{domain.roleType}
+			    </if>
+	  			<if test="domain.roleState != null">
+			    	and role_state = #{domain.roleState}
+			    </if>
+	    </where>
+  </select>
+  
+  <select id="getRolesByUser" resultMap="BaseResultMap" parameterType="map">
+	  	 select r.*
+		   from trole r, tuser_role tr
+		  where r.role_state != 1
+		    and r.row_id = tr.role_id
+		    and tr.user_id = #{user_id}
+  </select>
+  
+  <select id="getSelectRolesByUser" resultMap="BaseResultMap" parameterType="map">
+	  	  select r.*
+		   from trole r
+		  where r.role_state != 1
+		  <if test="user_id != null and user_id !=''">
+		    	and r.row_id not in
+		        (select tr.role_id from tuser_role tr where tr.user_id = #{user_id})
+		    </if>
+  </select>
+  <insert id="insertRolePermissionBatch" parameterType="hashmap" >
+	  insert into trole_permission
+		  (row_id, role_id, per_id)
+		  select sys_guid(), #{role_id}, p.row_id
+		    from tpermission p
+		   where p.per_sts != 1
+		     and p.row_id not in
+		         (select tp.per_id from trole_permission tp where tp.role_id = #{role_id})
+		     <if test="perids !=null and perids.length>0">
+		     	and p.row_id in
+				     <foreach collection="perids" index="index" item="id" open="(" separator="," close=")">
+						#{id}
+					</foreach>
+		     </if>
+  </insert>
+  <delete id="deleteRolePermissions" parameterType="hashmap" >
+        delete trole_permission tp 
+        	where tp.role_id = #{role_id}
+  </delete>
+  
+  <select id="getRolesByPosition" resultMap="BaseResultMap" parameterType="map">
+	  	  select r.*
+		   from trole r, tposition_role pr
+		  where r.role_state != 1
+		    and r.row_id = pr.role_id
+		    and pr.position_id = #{position_id}
+  </select>
+  
+  <select id="getUnRolesByPosition" resultMap="BaseResultMap" parameterType="map">
+	  	  select r.*
+		   from trole r
+		  where r.role_state != 1
+		  <if test="position_id != null and position_id !=''">
+		    	and r.row_id not in
+		        (select pr.role_id from tposition_role pr where pr.position_id = #{position_id})
+		    </if>
+  </select>
+</mapper>

@@ -1,0 +1,239 @@
+package com.zjhcsoft.rbac.organise.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.zjhcsoft.common.BaseController;
+import com.zjhcsoft.common.page.Page;
+import com.zjhcsoft.common.util.AppConstant;
+import com.zjhcsoft.common.util.JsonUtil;
+import com.zjhcsoft.common.util.ResponseEnvelope;
+import com.zjhcsoft.rbac.organise.domain.Organise;
+import com.zjhcsoft.rbac.organise.domain.OrganiseNode;
+import com.zjhcsoft.rbac.permission.domain.Permission;
+import com.zjhcsoft.rbac.role.domain.Role;
+import com.zjhcsoft.rbac.user.domain.User;
+import com.zjhcsoft.rpc.RequestDeployRoute;
+import com.zjhcsoft.rpc.context.impl.ResponseContext;
+
+/**
+ * 组织部门
+ * 
+ * @date 2014-6-10 上午11:33:48
+ * @Title: OrganiseController.java
+ * @author lff
+ */
+@Controller
+@RequestMapping("/organise")
+public class OrganiseController extends BaseController{
+	@Autowired
+	JsonUtil jsonUtil;
+	
+	private String organiseService = "organiseService";
+	/**
+	 * 组织树json
+	 * @date 2014-6-10 下午02:17:09
+	 * @author lff
+	 * @param modelMap
+	 * @param parOrgId
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping("/getOrganiseTree")
+	public void getOrganiseTree(ModelMap modelMap, String parOrgId,
+			HttpServletRequest request, HttpServletResponse response) {
+		Map<Object, Object> paramMap = new HashMap<Object, Object>();
+		paramMap.put("parOrgId", parOrgId);
+		ResponseContext result = RequestDeployRoute.call(AppConstant.APP1,
+				organiseService, "getOrganiseTree", paramMap);
+		if(result!=null ){
+			List<OrganiseNode> nodeList = (List<OrganiseNode>)result.get();
+			jsonUtil.outJsonArray(nodeList, response);
+		}
+	}
+	/**
+	 * 组织选择
+	 * @date 2014-6-16 上午08:58:31
+	 * @author lff
+	 * @param request
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("orgSelectWin")
+	public String orgSelectWin(HttpServletRequest request,User user) {
+		return "/rbac/organise/org_select_win";
+	}
+	/**
+	 * 组织管理
+	 * @date 2014-6-16 上午08:58:37
+	 * @author lff
+	 * @return
+	 */
+	@RequestMapping("index")
+	public String index(){
+		return "/rbac/organise/organise";
+	}
+	
+	@RequestMapping("main")
+	public String main(ModelMap modelMap, Organise organise,HttpServletRequest request){
+		Map<Object, Object> paramMap = new HashMap<Object, Object>();
+		// CommonUtil.filterToSelect(role);
+		paramMap.put("domain", organise);
+		ResponseContext result = RequestDeployRoute.call(AppConstant.APP1,
+				organiseService, "getPageCount", paramMap);
+		Page page = null;
+		if (result != null) {
+			page = super.executePage(request, (Long) result.getResult());
+		}
+		paramMap
+				.put("start", (page.getCurrentPage() - 1) * page.getEveryPage());
+		paramMap.put("limit", page.getEveryPage());
+		result = RequestDeployRoute.call(AppConstant.APP1, organiseService,
+				"getPageList", paramMap);
+		if (result.getResult() != null) {
+			List<Organise> list = (List<Organise>) result.getResult();
+			if (list != null && list.size() > 0) {
+				String[] fieldCodes = new String[] { "torganise-org_type" };
+				super.setDicTextInList(list, fieldCodes);
+			}
+			page.setDataList(list);
+		}
+
+		modelMap.addAttribute("page", page);
+		modelMap.addAttribute("organise", organise);
+		
+		return "/rbac/organise/organise_main";
+	}
+	/**
+	 * 跳转编辑
+	 * @date 2014-6-16 上午11:00:37
+	 * @author lff
+	 * @param modelMap
+	 * @param id
+	 * @param parOrgId
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/doEdit")
+	public String doEdit(ModelMap modelMap, String id,String parOrgId,
+			HttpServletRequest request, HttpServletResponse response){
+		if (StringUtils.isNotEmpty(id)) {
+			Map<Object, Object> paramMap = new HashMap<Object, Object>();
+			paramMap.put("id", id);
+			ResponseContext result = RequestDeployRoute.call(AppConstant.APP1,
+					organiseService, "getById", paramMap);
+			if (result != null) {
+				Organise organise = (Organise) result.getResult();
+				modelMap.addAttribute("organise", organise);
+				modelMap.addAttribute("type", "modify");
+			}
+		} else {
+			Organise organise = new  Organise();
+			organise.setParOrgId(parOrgId);
+			modelMap.addAttribute("organise", organise);
+			modelMap.addAttribute("type", "add");
+		}
+		
+		//下拉框
+		String[] field_codes = new String[] { "org_type" };
+		super.addDicList(request, "torganise", field_codes);
+		return "/rbac/organise/organise_form";
+	}
+	/**
+	 * 新增
+	 * @date 2014-6-16 上午11:12:44
+	 * @author lff
+	 * @param modelMap
+	 * @param organise
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/addOrganise")
+	public ResponseEnvelope addOrganise(ModelMap modelMap, Organise organise,
+			HttpServletRequest request, HttpServletResponse response){
+		ResponseEnvelope re = new ResponseEnvelope();
+		try{
+			Map<Object, Object> paramMap = new HashMap<Object, Object>();
+			paramMap.put("organise", organise);
+			ResponseContext result = RequestDeployRoute.call(AppConstant.APP1,
+					organiseService, "addOrganise", paramMap);
+			re.setMessage("添加成功!");
+			re.setState(true);
+		}catch(Exception e){
+			e.printStackTrace();
+			re.setMessage("添加失败!"+e.getMessage());
+			re.setState(false);
+		}
+		return re;
+	}
+	/**
+	 * 修改
+	 * @date 2014-6-16 上午11:12:36
+	 * @author lff
+	 * @param modelMap
+	 * @param organise
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/modifyOrganise")
+	public ResponseEnvelope modifyOrganise(ModelMap modelMap, Organise organise,
+			HttpServletRequest request, HttpServletResponse response){
+		ResponseEnvelope re = new ResponseEnvelope();
+		try{
+			Map<Object, Object> paramMap = new HashMap<Object, Object>();
+			paramMap.put("organise", organise);
+			ResponseContext result = RequestDeployRoute.call(AppConstant.APP1,
+					organiseService, "modifyOrganise", paramMap);
+			re.setMessage("修改成功!");
+			re.setState(true);
+		}catch(Exception e){
+			e.printStackTrace();
+			re.setMessage("修改失败!"+e.getMessage());
+			re.setState(false);
+		}
+		return re;
+	}
+	/**
+	 * 删除
+	 * @date 2014-6-16 上午11:12:30
+	 * @author lff
+	 * @param ids
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/deleteList")
+	public ResponseEnvelope deleteList(String[] ids, HttpServletRequest request){
+		ResponseEnvelope re = new ResponseEnvelope();
+		try{
+			Map paramMap = new HashMap();
+			paramMap.put("ids", ids);
+			RequestDeployRoute.call(AppConstant.APP1,
+					organiseService, "deleteLogicList", paramMap);
+			
+			re.setMessage("删除成功!");
+			re.setState(true);
+		}catch(Exception e){
+			e.printStackTrace();
+			re.setMessage("删除失败!"+e.getMessage());
+			re.setState(false);
+		}
+		return re;
+	}
+}

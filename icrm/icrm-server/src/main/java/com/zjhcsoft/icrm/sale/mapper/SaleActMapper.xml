@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.sale.mapper.SaleActMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.sale.domain.SaleAct" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_PERSON" property="lastPerson" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="TIMESTAMP" />
+    <result column="OPP_ID" property="oppId" jdbcType="VARCHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+    <result column="PERIOD_ID" property="periodId" jdbcType="VARCHAR" />
+    <result column="ACT_COMMENT" property="actComment" jdbcType="VARCHAR" />
+    <result column="ACT_PLACE" property="actPlace" jdbcType="VARCHAR" />
+    <result column="ACTOR" property="actor" jdbcType="VARCHAR" />
+    <result column="START_TIME" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="END_TIME" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="EXPECT_RESULT" property="expectResult" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, CREATE_PERSON, CREATE_DATE, LAST_PERSON, LAST_DATE, OPP_ID, CUST_ID, PERIOD_ID, 
+    ACT_COMMENT, ACT_PLACE, ACTOR, START_TIME, END_TIME, EXPECT_RESULT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_sale_act
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from crm_sale_act
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.sale.domain.SaleAct" >
+    insert into crm_sale_act (ROW_ID, CREATE_PERSON, CREATE_DATE, 
+      LAST_PERSON, LAST_DATE, OPP_ID, 
+      CUST_ID, PERIOD_ID, ACT_COMMENT, 
+      ACT_PLACE, ACTOR, START_TIME, 
+      END_TIME, EXPECT_RESULT)
+    values (#{rowId,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastPerson,jdbcType=VARCHAR}, #{lastDate,jdbcType=TIMESTAMP}, #{oppId,jdbcType=VARCHAR}, 
+      #{custId,jdbcType=VARCHAR}, #{periodId,jdbcType=VARCHAR}, #{actComment,jdbcType=VARCHAR}, 
+      #{actPlace,jdbcType=VARCHAR}, #{actor,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{expectResult,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.sale.domain.SaleAct" >
+    insert into crm_sale_act
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="oppId != null" >
+        OPP_ID,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="periodId != null" >
+        PERIOD_ID,
+      </if>
+      <if test="actComment != null" >
+        ACT_COMMENT,
+      </if>
+      <if test="actPlace != null" >
+        ACT_PLACE,
+      </if>
+      <if test="actor != null" >
+        ACTOR,
+      </if>
+      <if test="startTime != null" >
+        START_TIME,
+      </if>
+      <if test="endTime != null" >
+        END_TIME,
+      </if>
+      <if test="expectResult != null" >
+        EXPECT_RESULT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oppId != null" >
+        #{oppId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="periodId != null" >
+        #{periodId,jdbcType=VARCHAR},
+      </if>
+      <if test="actComment != null" >
+        #{actComment,jdbcType=VARCHAR},
+      </if>
+      <if test="actPlace != null" >
+        #{actPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="actor != null" >
+        #{actor,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectResult != null" >
+        #{expectResult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.sale.domain.SaleAct" >
+    update crm_sale_act
+    <set >
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oppId != null" >
+        OPP_ID = #{oppId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        CUST_ID = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="periodId != null" >
+        PERIOD_ID = #{periodId,jdbcType=VARCHAR},
+      </if>
+      <if test="actComment != null" >
+        ACT_COMMENT = #{actComment,jdbcType=VARCHAR},
+      </if>
+      <if test="actPlace != null" >
+        ACT_PLACE = #{actPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="actor != null" >
+        ACTOR = #{actor,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectResult != null" >
+        EXPECT_RESULT = #{expectResult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.sale.domain.SaleAct" >
+    update crm_sale_act
+    set CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      OPP_ID = #{oppId,jdbcType=VARCHAR},
+      CUST_ID = #{custId,jdbcType=VARCHAR},
+      PERIOD_ID = #{periodId,jdbcType=VARCHAR},
+      ACT_COMMENT = #{actComment,jdbcType=VARCHAR},
+      ACT_PLACE = #{actPlace,jdbcType=VARCHAR},
+      ACTOR = #{actor,jdbcType=VARCHAR},
+      START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      EXPECT_RESULT = #{expectResult,jdbcType=VARCHAR}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+</mapper>

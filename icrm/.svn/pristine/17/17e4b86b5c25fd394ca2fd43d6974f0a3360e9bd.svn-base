@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.cache.mapper.SysConfigDefMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.cache.domain.SysConfigDef" >
+    <id column="ATTR_ID" property="attrId" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_PERSON" property="lastPerson" jdbcType="VARCHAR" />
+    <result column="ATTR_CLASS" property="attrClass" jdbcType="VARCHAR" />
+    <result column="TABLE_NAME" property="tableName" jdbcType="VARCHAR" />
+    <result column="ATTR_CD" property="attrCd" jdbcType="VARCHAR" />
+    <result column="ATTR_NAME" property="attrName" jdbcType="VARCHAR" />
+    <result column="ATTR_TYPE" property="attrType" jdbcType="VARCHAR" />
+    <result column="ATTR_DESC" property="attrDesc" jdbcType="VARCHAR" />
+    <result column="DEFAULT_VALUE" property="defaultValue" jdbcType="VARCHAR" />
+    <result column="VALUE_FROM" property="valueFrom" jdbcType="VARCHAR" />
+    <result column="VALUE_TO" property="valueTo" jdbcType="VARCHAR" />
+    <result column="IS_UNIQUE" property="isUnique" jdbcType="VARCHAR" />
+    <result column="IS_NULLABLE" property="isNullable" jdbcType="VARCHAR" />
+    <result column="STATUS_CD" property="statusCd" jdbcType="VARCHAR" />
+    <result column="STATUS_DATE" property="statusDate" jdbcType="TIMESTAMP" />
+    <result column="ATTR_VALUE_TYPE" property="attrValueType" jdbcType="VARCHAR" />
+    <result column="ATTR_FORMAT" property="attrFormat" jdbcType="VARCHAR" />
+    <result column="ATTR_LENGTH" property="attrLength" jdbcType="INTEGER" />
+    <result column="PAR_ATTR_ID" property="parAttrId" jdbcType="VARCHAR" />
+    <result column="NOT_NULL_FLG" property="notNullFlg" jdbcType="VARCHAR" />
+    <result column="ORDER_BY" property="orderBy" jdbcType="INTEGER" />
+    <result column="HIDE_FLG" property="hideFlg" jdbcType="VARCHAR" />
+    <result column="READ_ONLY_FLG" property="readOnlyFlg" jdbcType="VARCHAR" />
+    <result column="INTERFACE_FLG" property="interfaceFlg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ATTR_ID, CREATE_DATE, CREATE_PERSON, LAST_DATE, LAST_PERSON, ATTR_CLASS, TABLE_NAME, 
+    ATTR_CD, ATTR_NAME, ATTR_TYPE, ATTR_DESC, DEFAULT_VALUE, VALUE_FROM, VALUE_TO, IS_UNIQUE, 
+    IS_NULLABLE, STATUS_CD, STATUS_DATE, ATTR_VALUE_TYPE, ATTR_FORMAT, ATTR_LENGTH, PAR_ATTR_ID, 
+    NOT_NULL_FLG, ORDER_BY, HIDE_FLG, READ_ONLY_FLG, INTERFACE_FLG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_config_def
+    where ATTR_ID = #{attrId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_config_def
+    where ATTR_ID = #{attrId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.cache.domain.SysConfigDef" >
+    insert into sys_config_def (ATTR_ID, CREATE_DATE, CREATE_PERSON, 
+      LAST_DATE, LAST_PERSON, ATTR_CLASS, 
+      TABLE_NAME, ATTR_CD, ATTR_NAME, 
+      ATTR_TYPE, ATTR_DESC, DEFAULT_VALUE, 
+      VALUE_FROM, VALUE_TO, IS_UNIQUE, 
+      IS_NULLABLE, STATUS_CD, STATUS_DATE, 
+      ATTR_VALUE_TYPE, ATTR_FORMAT, ATTR_LENGTH, 
+      PAR_ATTR_ID, NOT_NULL_FLG, ORDER_BY, 
+      HIDE_FLG, READ_ONLY_FLG, INTERFACE_FLG
+      )
+    values (#{attrId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, 
+      #{lastDate,jdbcType=TIMESTAMP}, #{lastPerson,jdbcType=VARCHAR}, #{attrClass,jdbcType=VARCHAR}, 
+      #{tableName,jdbcType=VARCHAR}, #{attrCd,jdbcType=VARCHAR}, #{attrName,jdbcType=VARCHAR}, 
+      #{attrType,jdbcType=VARCHAR}, #{attrDesc,jdbcType=VARCHAR}, #{defaultValue,jdbcType=VARCHAR}, 
+      #{valueFrom,jdbcType=VARCHAR}, #{valueTo,jdbcType=VARCHAR}, #{isUnique,jdbcType=VARCHAR}, 
+      #{isNullable,jdbcType=VARCHAR}, #{statusCd,jdbcType=VARCHAR}, #{statusDate,jdbcType=TIMESTAMP}, 
+      #{attrValueType,jdbcType=VARCHAR}, #{attrFormat,jdbcType=VARCHAR}, #{attrLength,jdbcType=INTEGER}, 
+      #{parAttrId,jdbcType=VARCHAR}, #{notNullFlg,jdbcType=VARCHAR}, #{orderBy,jdbcType=INTEGER}, 
+      #{hideFlg,jdbcType=VARCHAR}, #{readOnlyFlg,jdbcType=VARCHAR}, #{interfaceFlg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.cache.domain.SysConfigDef" >
+    insert into sys_config_def
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="attrId != null" >
+        ATTR_ID,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON,
+      </if>
+      <if test="attrClass != null" >
+        ATTR_CLASS,
+      </if>
+      <if test="tableName != null" >
+        TABLE_NAME,
+      </if>
+      <if test="attrCd != null" >
+        ATTR_CD,
+      </if>
+      <if test="attrName != null" >
+        ATTR_NAME,
+      </if>
+      <if test="attrType != null" >
+        ATTR_TYPE,
+      </if>
+      <if test="attrDesc != null" >
+        ATTR_DESC,
+      </if>
+      <if test="defaultValue != null" >
+        DEFAULT_VALUE,
+      </if>
+      <if test="valueFrom != null" >
+        VALUE_FROM,
+      </if>
+      <if test="valueTo != null" >
+        VALUE_TO,
+      </if>
+      <if test="isUnique != null" >
+        IS_UNIQUE,
+      </if>
+      <if test="isNullable != null" >
+        IS_NULLABLE,
+      </if>
+      <if test="statusCd != null" >
+        STATUS_CD,
+      </if>
+      <if test="statusDate != null" >
+        STATUS_DATE,
+      </if>
+      <if test="attrValueType != null" >
+        ATTR_VALUE_TYPE,
+      </if>
+      <if test="attrFormat != null" >
+        ATTR_FORMAT,
+      </if>
+      <if test="attrLength != null" >
+        ATTR_LENGTH,
+      </if>
+      <if test="parAttrId != null" >
+        PAR_ATTR_ID,
+      </if>
+      <if test="notNullFlg != null" >
+        NOT_NULL_FLG,
+      </if>
+      <if test="orderBy != null" >
+        ORDER_BY,
+      </if>
+      <if test="hideFlg != null" >
+        HIDE_FLG,
+      </if>
+      <if test="readOnlyFlg != null" >
+        READ_ONLY_FLG,
+      </if>
+      <if test="interfaceFlg != null" >
+        INTERFACE_FLG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="attrId != null" >
+        #{attrId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="attrClass != null" >
+        #{attrClass,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null" >
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="attrCd != null" >
+        #{attrCd,jdbcType=VARCHAR},
+      </if>
+      <if test="attrName != null" >
+        #{attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="attrType != null" >
+        #{attrType,jdbcType=VARCHAR},
+      </if>
+      <if test="attrDesc != null" >
+        #{attrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultValue != null" >
+        #{defaultValue,jdbcType=VARCHAR},
+      </if>
+      <if test="valueFrom != null" >
+        #{valueFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="valueTo != null" >
+        #{valueTo,jdbcType=VARCHAR},
+      </if>
+      <if test="isUnique != null" >
+        #{isUnique,jdbcType=VARCHAR},
+      </if>
+      <if test="isNullable != null" >
+        #{isNullable,jdbcType=VARCHAR},
+      </if>
+      <if test="statusCd != null" >
+        #{statusCd,jdbcType=VARCHAR},
+      </if>
+      <if test="statusDate != null" >
+        #{statusDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attrValueType != null" >
+        #{attrValueType,jdbcType=VARCHAR},
+      </if>
+      <if test="attrFormat != null" >
+        #{attrFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="attrLength != null" >
+        #{attrLength,jdbcType=INTEGER},
+      </if>
+      <if test="parAttrId != null" >
+        #{parAttrId,jdbcType=VARCHAR},
+      </if>
+      <if test="notNullFlg != null" >
+        #{notNullFlg,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        #{orderBy,jdbcType=INTEGER},
+      </if>
+      <if test="hideFlg != null" >
+        #{hideFlg,jdbcType=VARCHAR},
+      </if>
+      <if test="readOnlyFlg != null" >
+        #{readOnlyFlg,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceFlg != null" >
+        #{interfaceFlg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.cache.domain.SysConfigDef" >
+    update sys_config_def
+    <set >
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="attrClass != null" >
+        ATTR_CLASS = #{attrClass,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null" >
+        TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="attrCd != null" >
+        ATTR_CD = #{attrCd,jdbcType=VARCHAR},
+      </if>
+      <if test="attrName != null" >
+        ATTR_NAME = #{attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="attrType != null" >
+        ATTR_TYPE = #{attrType,jdbcType=VARCHAR},
+      </if>
+      <if test="attrDesc != null" >
+        ATTR_DESC = #{attrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultValue != null" >
+        DEFAULT_VALUE = #{defaultValue,jdbcType=VARCHAR},
+      </if>
+      <if test="valueFrom != null" >
+        VALUE_FROM = #{valueFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="valueTo != null" >
+        VALUE_TO = #{valueTo,jdbcType=VARCHAR},
+      </if>
+      <if test="isUnique != null" >
+        IS_UNIQUE = #{isUnique,jdbcType=VARCHAR},
+      </if>
+      <if test="isNullable != null" >
+        IS_NULLABLE = #{isNullable,jdbcType=VARCHAR},
+      </if>
+      <if test="statusCd != null" >
+        STATUS_CD = #{statusCd,jdbcType=VARCHAR},
+      </if>
+      <if test="statusDate != null" >
+        STATUS_DATE = #{statusDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attrValueType != null" >
+        ATTR_VALUE_TYPE = #{attrValueType,jdbcType=VARCHAR},
+      </if>
+      <if test="attrFormat != null" >
+        ATTR_FORMAT = #{attrFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="attrLength != null" >
+        ATTR_LENGTH = #{attrLength,jdbcType=INTEGER},
+      </if>
+      <if test="parAttrId != null" >
+        PAR_ATTR_ID = #{parAttrId,jdbcType=VARCHAR},
+      </if>
+      <if test="notNullFlg != null" >
+        NOT_NULL_FLG = #{notNullFlg,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        ORDER_BY = #{orderBy,jdbcType=INTEGER},
+      </if>
+      <if test="hideFlg != null" >
+        HIDE_FLG = #{hideFlg,jdbcType=VARCHAR},
+      </if>
+      <if test="readOnlyFlg != null" >
+        READ_ONLY_FLG = #{readOnlyFlg,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceFlg != null" >
+        INTERFACE_FLG = #{interfaceFlg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ATTR_ID = #{attrId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.cache.domain.SysConfigDef" >
+    update sys_config_def
+    set CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      ATTR_CLASS = #{attrClass,jdbcType=VARCHAR},
+      TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      ATTR_CD = #{attrCd,jdbcType=VARCHAR},
+      ATTR_NAME = #{attrName,jdbcType=VARCHAR},
+      ATTR_TYPE = #{attrType,jdbcType=VARCHAR},
+      ATTR_DESC = #{attrDesc,jdbcType=VARCHAR},
+      DEFAULT_VALUE = #{defaultValue,jdbcType=VARCHAR},
+      VALUE_FROM = #{valueFrom,jdbcType=VARCHAR},
+      VALUE_TO = #{valueTo,jdbcType=VARCHAR},
+      IS_UNIQUE = #{isUnique,jdbcType=VARCHAR},
+      IS_NULLABLE = #{isNullable,jdbcType=VARCHAR},
+      STATUS_CD = #{statusCd,jdbcType=VARCHAR},
+      STATUS_DATE = #{statusDate,jdbcType=TIMESTAMP},
+      ATTR_VALUE_TYPE = #{attrValueType,jdbcType=VARCHAR},
+      ATTR_FORMAT = #{attrFormat,jdbcType=VARCHAR},
+      ATTR_LENGTH = #{attrLength,jdbcType=INTEGER},
+      PAR_ATTR_ID = #{parAttrId,jdbcType=VARCHAR},
+      NOT_NULL_FLG = #{notNullFlg,jdbcType=VARCHAR},
+      ORDER_BY = #{orderBy,jdbcType=INTEGER},
+      HIDE_FLG = #{hideFlg,jdbcType=VARCHAR},
+      READ_ONLY_FLG = #{readOnlyFlg,jdbcType=VARCHAR},
+      INTERFACE_FLG = #{interfaceFlg,jdbcType=VARCHAR}
+    where ATTR_ID = #{attrId,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  <!-- 		值列表定义查询	 -->
+   <resultMap id="_sysConfigValueMap" type="com.zjhcsoft.icrm.cache.domain.SysConfigValue">
+       <id property="attrValueId" column="attr_value_id" />
+       <result property="attrValueName" column="attr_value_name" />
+       <result property="attrValue" column="attr_value" />
+       <result property="upAttrValueId" column="up_attr_value_id" />
+   </resultMap>
+  <resultMap id="SysConfigDefDaoResultMap" type="com.zjhcsoft.icrm.cache.domain.SysConfigDefDao" extends="BaseResultMap">
+  	<result property="fieldCode" column="fieldCode" />	
+  	 <collection property="configValueList" column="attrValueId" ofType="com.zjhcsoft.icrm.cache.domain.SysConfigValue" javaType="ArrayList" resultMap="_sysConfigValueMap"/>
+  </resultMap>
+  <select id="getSysConfigDefList" resultMap="SysConfigDefDaoResultMap">
+		SELECT a.*,
+		       CONCAT(a.table_name, CONCAT('-', a.attr_cd)) fieldCode,
+		       b.attr_value_id,
+		       b.attr_value_name,
+		       b.attr_value,
+		       b.up_attr_value_id
+		  from sys_config_def a
+		  left outer join sys_config_value b on a.attr_id = b.attr_id
+		 where a.status_cd = '1'
+		   and b.status_cd = '1'
+		 order by fieldCode, b.order_by asc
+  </select>
+  
+  
+  
+  
+</mapper>

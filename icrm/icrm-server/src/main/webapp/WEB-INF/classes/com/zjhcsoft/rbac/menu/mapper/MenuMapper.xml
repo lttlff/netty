@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.rbac.menu.mapper.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.rbac.menu.domain.Menu" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="DATE" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="DATE" />
+    <result column="LAST_PERSON" property="lastPerson" jdbcType="VARCHAR" />
+    <result column="MENU_NAME" property="menuName" jdbcType="VARCHAR" />
+    <result column="MENU_URL" property="menuUrl" jdbcType="VARCHAR" />
+    <result column="MENU_DESC" property="menuDesc" jdbcType="VARCHAR" />
+    <result column="PAR_ID" property="parId" jdbcType="VARCHAR" />
+    <result column="LEAF_FLG" property="leafFlg" jdbcType="DECIMAL" />
+    <result column="MENU_TYPE" property="menuType" jdbcType="DECIMAL" />
+    <result column="MENU_LEVEL" property="menuLevel" jdbcType="DECIMAL" />
+    <result column="MENU_STS" property="menuSts" jdbcType="DECIMAL" />
+    <result column="MENU_SEQ" property="menuSeq" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, CREATE_DATE, CREATE_PERSON, LAST_DATE, LAST_PERSON, MENU_NAME, MENU_URL, 
+    MENU_DESC, PAR_ID, LEAF_FLG, MENU_TYPE, MENU_LEVEL, MENU_STS, MENU_SEQ
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TMENU
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TMENU
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.rbac.menu.domain.Menu" >
+    insert into TMENU (ROW_ID, CREATE_DATE, CREATE_PERSON, 
+      LAST_DATE, LAST_PERSON, MENU_NAME, 
+      MENU_URL, MENU_DESC, PAR_ID, 
+      LEAF_FLG, MENU_TYPE, MENU_LEVEL, 
+      MENU_STS, MENU_SEQ)
+    values (#{rowId,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, #{createPerson,jdbcType=VARCHAR}, 
+      #{lastDate,jdbcType=DATE}, #{lastPerson,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, 
+      #{menuUrl,jdbcType=VARCHAR}, #{menuDesc,jdbcType=VARCHAR}, #{parId,jdbcType=VARCHAR}, 
+      #{leafFlg,jdbcType=DECIMAL}, #{menuType,jdbcType=DECIMAL}, #{menuLevel,jdbcType=DECIMAL}, 
+      #{menuSts,jdbcType=DECIMAL}, #{menuSeq,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.rbac.menu.domain.Menu" >
+    insert into TMENU
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON,
+      </if>
+      <if test="menuName != null" >
+        MENU_NAME,
+      </if>
+      <if test="menuUrl != null" >
+        MENU_URL,
+      </if>
+      <if test="menuDesc != null" >
+        MENU_DESC,
+      </if>
+      <if test="parId != null" >
+        PAR_ID,
+      </if>
+      <if test="leafFlg != null" >
+        LEAF_FLG,
+      </if>
+      <if test="menuType != null" >
+        MENU_TYPE,
+      </if>
+      <if test="menuLevel != null" >
+        MENU_LEVEL,
+      </if>
+      <if test="menuSts != null" >
+        MENU_STS,
+      </if>
+      <if test="menuSeq != null" >
+        MENU_SEQ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=DATE},
+      </if>
+      <if test="lastPerson != null" >
+        #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuDesc != null" >
+        #{menuDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parId != null" >
+        #{parId,jdbcType=VARCHAR},
+      </if>
+      <if test="leafFlg != null" >
+        #{leafFlg,jdbcType=DECIMAL},
+      </if>
+      <if test="menuType != null" >
+        #{menuType,jdbcType=DECIMAL},
+      </if>
+      <if test="menuLevel != null" >
+        #{menuLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="menuSts != null" >
+        #{menuSts,jdbcType=DECIMAL},
+      </if>
+      <if test="menuSeq != null" >
+        #{menuSeq,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.rbac.menu.domain.Menu" >
+    update TMENU
+    <set >
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=DATE},
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null" >
+        MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuDesc != null" >
+        MENU_DESC = #{menuDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parId != null" >
+        PAR_ID = #{parId,jdbcType=VARCHAR},
+      </if>
+      <if test="leafFlg != null" >
+        LEAF_FLG = #{leafFlg,jdbcType=DECIMAL},
+      </if>
+      <if test="menuType != null" >
+        MENU_TYPE = #{menuType,jdbcType=DECIMAL},
+      </if>
+      <if test="menuLevel != null" >
+        MENU_LEVEL = #{menuLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="menuSts != null" >
+        MENU_STS = #{menuSts,jdbcType=DECIMAL},
+      </if>
+      <if test="menuSeq != null" >
+        MENU_SEQ = #{menuSeq,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.rbac.menu.domain.Menu" >
+    update TMENU
+    set CREATE_DATE = #{createDate,jdbcType=DATE},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      LAST_DATE = #{lastDate,jdbcType=DATE},
+      LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      MENU_DESC = #{menuDesc,jdbcType=VARCHAR},
+      PAR_ID = #{parId,jdbcType=VARCHAR},
+      LEAF_FLG = #{leafFlg,jdbcType=DECIMAL},
+      MENU_TYPE = #{menuType,jdbcType=DECIMAL},
+      MENU_LEVEL = #{menuLevel,jdbcType=DECIMAL},
+      MENU_STS = #{menuSts,jdbcType=DECIMAL},
+      MENU_SEQ = #{menuSeq,jdbcType=DECIMAL}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectAllMenu" resultMap="BaseResultMap">
+  	
+  	select * from sys_menu T WHERE T.DEL_FLG = '0'
+  
+  </select>
+  
+  <sql id="select_sql">
+  	select 
+    <include refid="Base_Column_List" />
+    from tmenu
+    	where menu_sts !=1
+    	<if test="domain !=null">
+	    	<if test="domain.menuName !=null and domain.menuName !=''">
+	    		and menu_name like '%${domain.menuName}%'
+	    	</if>
+	    	<if test="domain.menuType !=null">
+	    		and menu_type = #{domain.menuType}
+	    	</if>
+	    	<if test="domain.leafFlg !=null">
+	    		and leaf_flg = #{domain.leafFlg}
+	    	</if>
+    	</if>
+  </sql>
+  <select id="getPageList" resultMap="BaseResultMap" parameterType="hashmap" >
+    <include refid="com.zjhcsoft.common.mapper.PageMapper.PagePre" />
+    <include refid="select_sql" />
+    <include refid="com.zjhcsoft.common.mapper.PageMapper.PageEnd" />
+  </select>
+  
+  <select id="getPageCount" resultType="long" parameterType="hashmap" >
+    <include refid="com.zjhcsoft.common.mapper.PageMapper.PageCountPre" />
+    <include refid="select_sql" />
+    <include refid="com.zjhcsoft.common.mapper.PageMapper.PageCountEnd" />
+  </select>
+</mapper>

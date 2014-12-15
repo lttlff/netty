@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.cache.mapper.SysConfigValueMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.cache.domain.SysConfigValue" >
+    <id column="ATTR_VALUE_ID" property="attrValueId" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_PERSON" property="lastPerson" jdbcType="VARCHAR" />
+    <result column="ATTR_ID" property="attrId" jdbcType="VARCHAR" />
+    <result column="UP_ATTR_VALUE_ID" property="upAttrValueId" jdbcType="VARCHAR" />
+    <result column="ATTR_VALUE_NAME" property="attrValueName" jdbcType="VARCHAR" />
+    <result column="ATTR_VALUE" property="attrValue" jdbcType="VARCHAR" />
+    <result column="ORDER_BY" property="orderBy" jdbcType="INTEGER" />
+    <result column="ATTR_DESC" property="attrDesc" jdbcType="VARCHAR" />
+    <result column="STATUS_CD" property="statusCd" jdbcType="VARCHAR" />
+    <result column="STATUS_DATE" property="statusDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ATTR_VALUE_ID, CREATE_DATE, CREATE_PERSON, LAST_DATE, LAST_PERSON, ATTR_ID, UP_ATTR_VALUE_ID, 
+    ATTR_VALUE_NAME, ATTR_VALUE, ORDER_BY, ATTR_DESC, STATUS_CD, STATUS_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_config_value
+    where ATTR_VALUE_ID = #{attrValueId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_config_value
+    where ATTR_VALUE_ID = #{attrValueId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.cache.domain.SysConfigValue" >
+    insert into sys_config_value (ATTR_VALUE_ID, CREATE_DATE, CREATE_PERSON, 
+      LAST_DATE, LAST_PERSON, ATTR_ID, 
+      UP_ATTR_VALUE_ID, ATTR_VALUE_NAME, ATTR_VALUE, 
+      ORDER_BY, ATTR_DESC, STATUS_CD, 
+      STATUS_DATE)
+    values (#{attrValueId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, 
+      #{lastDate,jdbcType=TIMESTAMP}, #{lastPerson,jdbcType=VARCHAR}, #{attrId,jdbcType=VARCHAR}, 
+      #{upAttrValueId,jdbcType=VARCHAR}, #{attrValueName,jdbcType=VARCHAR}, #{attrValue,jdbcType=VARCHAR}, 
+      #{orderBy,jdbcType=INTEGER}, #{attrDesc,jdbcType=VARCHAR}, #{statusCd,jdbcType=VARCHAR}, 
+      #{statusDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.cache.domain.SysConfigValue" >
+    insert into sys_config_value
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="attrValueId != null" >
+        ATTR_VALUE_ID,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON,
+      </if>
+      <if test="attrId != null" >
+        ATTR_ID,
+      </if>
+      <if test="upAttrValueId != null" >
+        UP_ATTR_VALUE_ID,
+      </if>
+      <if test="attrValueName != null" >
+        ATTR_VALUE_NAME,
+      </if>
+      <if test="attrValue != null" >
+        ATTR_VALUE,
+      </if>
+      <if test="orderBy != null" >
+        ORDER_BY,
+      </if>
+      <if test="attrDesc != null" >
+        ATTR_DESC,
+      </if>
+      <if test="statusCd != null" >
+        STATUS_CD,
+      </if>
+      <if test="statusDate != null" >
+        STATUS_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="attrValueId != null" >
+        #{attrValueId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="attrId != null" >
+        #{attrId,jdbcType=VARCHAR},
+      </if>
+      <if test="upAttrValueId != null" >
+        #{upAttrValueId,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValueName != null" >
+        #{attrValueName,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue != null" >
+        #{attrValue,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        #{orderBy,jdbcType=INTEGER},
+      </if>
+      <if test="attrDesc != null" >
+        #{attrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="statusCd != null" >
+        #{statusCd,jdbcType=VARCHAR},
+      </if>
+      <if test="statusDate != null" >
+        #{statusDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.cache.domain.SysConfigValue" >
+    update sys_config_value
+    <set >
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="attrId != null" >
+        ATTR_ID = #{attrId,jdbcType=VARCHAR},
+      </if>
+      <if test="upAttrValueId != null" >
+        UP_ATTR_VALUE_ID = #{upAttrValueId,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValueName != null" >
+        ATTR_VALUE_NAME = #{attrValueName,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue != null" >
+        ATTR_VALUE = #{attrValue,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        ORDER_BY = #{orderBy,jdbcType=INTEGER},
+      </if>
+      <if test="attrDesc != null" >
+        ATTR_DESC = #{attrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="statusCd != null" >
+        STATUS_CD = #{statusCd,jdbcType=VARCHAR},
+      </if>
+      <if test="statusDate != null" >
+        STATUS_DATE = #{statusDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ATTR_VALUE_ID = #{attrValueId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.cache.domain.SysConfigValue" >
+    update sys_config_value
+    set CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      ATTR_ID = #{attrId,jdbcType=VARCHAR},
+      UP_ATTR_VALUE_ID = #{upAttrValueId,jdbcType=VARCHAR},
+      ATTR_VALUE_NAME = #{attrValueName,jdbcType=VARCHAR},
+      ATTR_VALUE = #{attrValue,jdbcType=VARCHAR},
+      ORDER_BY = #{orderBy,jdbcType=INTEGER},
+      ATTR_DESC = #{attrDesc,jdbcType=VARCHAR},
+      STATUS_CD = #{statusCd,jdbcType=VARCHAR},
+      STATUS_DATE = #{statusDate,jdbcType=TIMESTAMP}
+    where ATTR_VALUE_ID = #{attrValueId,jdbcType=VARCHAR}
+  </update>
+</mapper>

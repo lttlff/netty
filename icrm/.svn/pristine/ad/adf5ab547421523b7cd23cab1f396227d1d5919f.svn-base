@@ -1,0 +1,11 @@
+<apps>
+    <app name="crm_module" timeout="600" desc="crm_desc">
+       <server name="server1" host="127.0.0.1" port="9091">
+       </server>
+       <!--  server name="server2" host="127.0.0.1" port="9092">
+       	  <param name="transport_protocol" value="tcp" />
+       	  <param name="data_protocol" value="HessianTcpNIO" />
+       	   <param name="className" value="org.dacell.rpc.tcp.protocol.hessian.HessianTcpNIOProtocol" />
+       </server>-->
+    </app>
+</apps>

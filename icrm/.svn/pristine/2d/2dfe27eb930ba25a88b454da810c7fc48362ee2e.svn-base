@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.rbac.permission.mapper.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.rbac.permission.domain.Permission" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="DATE" />
+    <result column="LAST_PERSON" property="lastPerson" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="DATE" />
+    <result column="PER_CODE" property="perCode" jdbcType="VARCHAR" />
+    <result column="PER_NAME" property="perName" jdbcType="VARCHAR" />
+    <result column="PER_DESC" property="perDesc" jdbcType="VARCHAR" />
+    <result column="PER_TYPE" property="perType" jdbcType="DECIMAL" />
+    <result column="PER_STS" property="perSts" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, CREATE_PERSON, CREATE_DATE, LAST_PERSON, LAST_DATE, PER_CODE, PER_NAME, PER_DESC, 
+    PER_TYPE, PER_STS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TPERMISSION
+    where per_sts !=1
+    and ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TPERMISSION
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.rbac.permission.domain.Permission" >
+    insert into TPERMISSION (ROW_ID, CREATE_PERSON, CREATE_DATE, 
+      LAST_PERSON, LAST_DATE, PER_CODE, 
+      PER_NAME, PER_DESC, PER_TYPE, 
+      PER_STS)
+    values (#{rowId,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, 
+      #{lastPerson,jdbcType=VARCHAR}, #{lastDate,jdbcType=DATE}, #{perCode,jdbcType=VARCHAR}, 
+      #{perName,jdbcType=VARCHAR}, #{perDesc,jdbcType=VARCHAR}, #{perType,jdbcType=DECIMAL}, 
+      #{perSts,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.rbac.permission.domain.Permission" >
+    insert into TPERMISSION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="perCode != null" >
+        PER_CODE,
+      </if>
+      <if test="perName != null" >
+        PER_NAME,
+      </if>
+      <if test="perDesc != null" >
+        PER_DESC,
+      </if>
+      <if test="perType != null" >
+        PER_TYPE,
+      </if>
+      <if test="perSts != null" >
+        PER_STS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="lastPerson != null" >
+        #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=DATE},
+      </if>
+      <if test="perCode != null" >
+        #{perCode,jdbcType=VARCHAR},
+      </if>
+      <if test="perName != null" >
+        #{perName,jdbcType=VARCHAR},
+      </if>
+      <if test="perDesc != null" >
+        #{perDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="perType != null" >
+        #{perType,jdbcType=DECIMAL},
+      </if>
+      <if test="perSts != null" >
+        #{perSts,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.rbac.permission.domain.Permission" >
+    update TPERMISSION
+    <set >
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=DATE},
+      </if>
+      <if test="perCode != null" >
+        PER_CODE = #{perCode,jdbcType=VARCHAR},
+      </if>
+      <if test="perName != null" >
+        PER_NAME = #{perName,jdbcType=VARCHAR},
+      </if>
+      <if test="perDesc != null" >
+        PER_DESC = #{perDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="perType != null" >
+        PER_TYPE = #{perType,jdbcType=DECIMAL},
+      </if>
+      <if test="perSts != null" >
+        PER_STS = #{perSts,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.rbac.permission.domain.Permission" >
+    update TPERMISSION
+    set CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=DATE},
+      LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      LAST_DATE = #{lastDate,jdbcType=DATE},
+      PER_CODE = #{perCode,jdbcType=VARCHAR},
+      PER_NAME = #{perName,jdbcType=VARCHAR},
+      PER_DESC = #{perDesc,jdbcType=VARCHAR},
+      PER_TYPE = #{perType,jdbcType=DECIMAL},
+      PER_STS = #{perSts,jdbcType=DECIMAL}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getPermissionsByRole" resultMap="BaseResultMap" parameterType="hashmap" >
+    select p.*
+	  from tpermission p, trole_permission rp
+	 where p.row_id = rp.per_id
+	   and p.per_sts !=1 
+	   and rp.role_id =#{role_id}
+  </select>
+  
+  <select id="getUnPermissionsByRole" resultMap="BaseResultMap" parameterType="hashmap" >
+    select p.*
+	  from tpermission p
+	 where p.per_sts != 1
+	   <if test="role_id != null and role_id !='' " >
+        and p.row_id not in(select rp.per_id from trole_permission rp 
+        		where rp.role_id = #{role_id} )
+       </if> 
+  </select>
+  <sql id="select_sql">
+  	select 
+    <include refid="Base_Column_List" />
+    from TPERMISSION
+    	where per_sts !=1
+    	<if test="domain !=null">
+    		<if test="domain.perCode !=null and domain.perCode !=''">
+	    		and per_code like '%${domain.perCode}%'
+	    	</if>
+	    	<if test="domain.perName !=null and domain.perName !=''">
+	    		and per_name like '%${domain.perName}%'
+	    	</if>
+	    	<if test="domain.perType !=null">
+	    		and per_type = domain.perType
+	    	</if>
+    	</if>
+  </sql>
+  <select id="getPageList" resultMap="BaseResultMap" parameterType="hashmap" >
+    <include refid="com.zjhcsoft.common.mapper.PageMapper.PagePre" />
+    <include refid="select_sql" />
+    <include refid="com.zjhcsoft.common.mapper.PageMapper.PageEnd" />
+  </select>
+  
+  <select id="getPageCount" resultType="long" parameterType="hashmap" >
+    <include refid="com.zjhcsoft.common.mapper.PageMapper.PageCountPre" />
+    <include refid="select_sql" />
+    <include refid="com.zjhcsoft.common.mapper.PageMapper.PageCountEnd" />
+  </select>
+  
+</mapper>

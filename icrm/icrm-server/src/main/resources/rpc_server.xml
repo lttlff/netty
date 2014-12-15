@@ -1,0 +1,91 @@
+<rpc_server>
+    <servers>
+       <server name="TcpNio" className="com.zjhcsoft.rpc.tcpserver.nio.DefaultTcpNettyNioServer">
+          <param name="port" value="9091" />
+          <param name="minIdle" value="2" />
+          <param name="maxActive" value="50" />
+          <param name="soTimeOut" value="9999990000" />
+          <param name="serverHandler" value="com.zjhcsoft.rpc.handler.DefaultServerHandler" />
+       </server>
+    </servers>
+	<protocols>
+		<protocol transport_protocol="tcp" data_protocol="HessianTcpNIO"
+			interfaceClassName="com.zjhcsoft.rpc.tcpserver.protocol.TcpProtocol"
+			className="com.zjhcsoft.rpc.tcpserver.protocol.hessian.HessianTcpNIOProtocol"
+			code="0002">
+			<param name="pattern" value="*hession*" />
+		</protocol>
+	</protocols>
+	
+	<protocol transport_protocol="tcp" data_protocol="JSONTcpNIO"
+			interfaceClassName="com.zjhcsoft.rpc.tcpserver.protocol.TcpProtocol"
+			className="com.zjhcsoft.rpc.tcpserver.protocol.json.JsonTcpNIOProtocol"
+			code="0012">
+			<param name="pattern" value="*json*" />
+	</protocol>
+	
+	
+	<!--interceptors name="user1" pattern="*" type="filter" mode="before">
+		<interceptor name="ConcurrencyInterceptor" className="com.zjhcsoft.rpc.interceptor.ConcurrencyInterceptor">
+			<param name="11" value="11" />
+		</interceptor>
+	</interceptors>
+	
+	<interceptors name="user1" pattern="*" type="filter" mode="around">
+		<interceptor name="ConcurrencyInterceptor2" className="com.zjhcsoft.rpc.interceptor.ConcurrencyInterceptor2">
+			<param name="11" value="11" />
+		</interceptor>
+		<interceptor name="ConcurrencyInterceptor3" className="com.zjhcsoft.rpc.interceptor.ConcurrencyInterceptor3">
+			<param name="11" value="11" />
+		</interceptor>
+	</interceptors>
+	
+	<interceptors name="user1" pattern="*" type="filter" mode="after">
+		<interceptor name="ConcurrencyInterceptor8" className="com.zjhcsoft.rpc.interceptor.ConcurrencyInterceptor8">
+			<param name="11" value="11" />
+		</interceptor>
+		<interceptor name="ConcurrencyInterceptor9" className="com.zjhcsoft.rpc.interceptor.ConcurrencyInterceptor9">
+			<param name="11" value="11" />
+		</interceptor>
+	</interceptors>
+	
+	<interceptors name="user2" pattern="*" type="filter" mode="around">
+		<interceptor name="ConcurrencyInterceptor10" className="com.zjhcsoft.rpc.interceptor.ConcurrencyInterceptor10">
+			<param name="12" value="12" />
+		</interceptor>
+	</interceptors>
+	
+	<interceptors name="user1" pattern="org.*.test" type="interceptor" mode="before">
+		<interceptor name="ConcurrencyInterceptor8" className="com.zjhcsoft.rpc.interceptor.ConcurrencyInterceptor3">
+			<param name="11" value="11" />
+		</interceptor>
+		<interceptor name="ConcurrencyInterceptor9" className="com.zjhcsoft.rpc.interceptor.ConcurrencyInterceptor4">
+			<param name="11" value="11" />
+		</interceptor>
+	</interceptors>
+	
+	<interceptors name="user1" pattern="org.*.*.mybatis" type="interceptor" mode="around">
+		<interceptor name="ConcurrencyInterceptor8" className="com.zjhcsoft.rpc.interceptor.ConcurrencyInterceptor5">
+			<param name="11" value="11" />
+		</interceptor>
+		<interceptor name="ConcurrencyInterceptor9" className="com.zjhcsoft.rpc.interceptor.ConcurrencyInterceptor6">
+			<param name="11" value="11" />
+		</interceptor>
+	</interceptors>
+	
+	<interceptors name="user1" pattern="com.zjhcsoft.*(getName2)" type="interceptor" mode="before">
+		<interceptor name="ConcurrencyInterceptor8" className="com.zjhcsoft.rpc.interceptor.ConcurrencyInterceptor">
+			<param name="11" value="11" />
+		</interceptor>
+		<interceptor name="ConcurrencyInterceptor9" className="com.zjhcsoft.rpc.interceptor.ConcurrencyInterceptor2">
+			<param name="11" value="11" />
+		</interceptor>
+	</interceptors>
+	
+	<interceptors name="user1" pattern="*.*.*.mybatis" type="interceptor" mode="around">
+		<interceptor name="ConcurrencyInterceptor7" className="com.zjhcsoft.rpc.interceptor.ConcurrencyInterceptor7">
+			<param name="11" value="11" />
+		</interceptor>
+	</interceptors>
+	  -->
+</rpc_server>

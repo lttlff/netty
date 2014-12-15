@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.rbac.organise.mapper.OrganiseMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.rbac.organise.domain.Organise" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_PERSON" property="lastPerson" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="TIMESTAMP" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="ORG_LEVEL" property="orgLevel" jdbcType="DECIMAL" />
+    <result column="ORG_TYPE" property="orgType" jdbcType="DECIMAL" />
+    <result column="PAR_ORG_ID" property="parOrgId" jdbcType="VARCHAR" />
+    <result column="ORG_DESC" property="orgDesc" jdbcType="VARCHAR" />
+    <result column="ORG_PATH" property="orgPath" jdbcType="VARCHAR" />
+    <result column="ORG_STS" property="orgSts" jdbcType="DECIMAL" />
+    <result column="LEAF_FLG" property="leafFlg" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, CREATE_PERSON, CREATE_DATE, LAST_PERSON, LAST_DATE, ORG_CODE, ORG_NAME, ORG_LEVEL, 
+    ORG_TYPE, PAR_ORG_ID, ORG_DESC, ORG_PATH, ORG_STS, LEAF_FLG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TORGANISE
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TORGANISE
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.rbac.organise.domain.Organise" >
+    insert into TORGANISE (ROW_ID, CREATE_PERSON, CREATE_DATE, 
+      LAST_PERSON, LAST_DATE, ORG_CODE, 
+      ORG_NAME, ORG_LEVEL, ORG_TYPE, 
+      PAR_ORG_ID, ORG_DESC, ORG_PATH, 
+      ORG_STS, LEAF_FLG)
+    values (#{rowId,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastPerson,jdbcType=VARCHAR}, #{lastDate,jdbcType=TIMESTAMP}, #{orgCode,jdbcType=VARCHAR}, 
+      #{orgName,jdbcType=VARCHAR}, #{orgLevel,jdbcType=DECIMAL}, #{orgType,jdbcType=DECIMAL}, 
+      #{parOrgId,jdbcType=VARCHAR}, #{orgDesc,jdbcType=VARCHAR}, #{orgPath,jdbcType=VARCHAR}, 
+      #{orgSts,jdbcType=DECIMAL}, #{leafFlg,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.rbac.organise.domain.Organise" >
+    insert into TORGANISE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE,
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME,
+      </if>
+      <if test="orgLevel != null" >
+        ORG_LEVEL,
+      </if>
+      <if test="orgType != null" >
+        ORG_TYPE,
+      </if>
+      <if test="parOrgId != null" >
+        PAR_ORG_ID,
+      </if>
+      <if test="orgDesc != null" >
+        ORG_DESC,
+      </if>
+      <if test="orgPath != null" >
+        ORG_PATH,
+      </if>
+      <if test="orgSts != null" >
+        ORG_STS,
+      </if>
+      <if test="leafFlg != null" >
+        LEAF_FLG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLevel != null" >
+        #{orgLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="orgType != null" >
+        #{orgType,jdbcType=DECIMAL},
+      </if>
+      <if test="parOrgId != null" >
+        #{parOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgDesc != null" >
+        #{orgDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="orgPath != null" >
+        #{orgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="orgSts != null" >
+        #{orgSts,jdbcType=DECIMAL},
+      </if>
+      <if test="leafFlg != null" >
+        #{leafFlg,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.rbac.organise.domain.Organise" >
+    update TORGANISE
+    <set >
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLevel != null" >
+        ORG_LEVEL = #{orgLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="orgType != null" >
+        ORG_TYPE = #{orgType,jdbcType=DECIMAL},
+      </if>
+      <if test="parOrgId != null" >
+        PAR_ORG_ID = #{parOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgDesc != null" >
+        ORG_DESC = #{orgDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="orgPath != null" >
+        ORG_PATH = #{orgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="orgSts != null" >
+        ORG_STS = #{orgSts,jdbcType=DECIMAL},
+      </if>
+      <if test="leafFlg != null" >
+        LEAF_FLG = #{leafFlg,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.rbac.organise.domain.Organise" >
+    update TORGANISE
+    set CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      ORG_LEVEL = #{orgLevel,jdbcType=DECIMAL},
+      ORG_TYPE = #{orgType,jdbcType=DECIMAL},
+      PAR_ORG_ID = #{parOrgId,jdbcType=VARCHAR},
+      ORG_DESC = #{orgDesc,jdbcType=VARCHAR},
+      ORG_PATH = #{orgPath,jdbcType=VARCHAR},
+      ORG_STS = #{orgSts,jdbcType=DECIMAL},
+      LEAF_FLG = #{leafFlg,jdbcType=DECIMAL}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getOrganiseTreeByMap" resultMap="BaseResultMap" parameterType="hashmap" >
+    select 
+    <include refid="Base_Column_List" />
+    from TORGANISE
+    where 
+    org_sts !=1
+    and par_org_id = #{parOrgId,jdbcType=VARCHAR}
+      <if test="orgCode != null" >
+        and ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+      </if>
+      <if test="orgName != null" >
+        and ORG_NAME = #{orgName,jdbcType=VARCHAR}
+      </if>
+  </select>
+  <sql id="select_sql">
+  	select 
+    <include refid="Base_Column_List" />
+    from TORGANISE
+    where org_sts !=1
+    <if test="domain != null" >
+       <if test="domain.parOrgId != null" >
+	        and  par_org_id = #{domain.parOrgId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="domain.orgCode != null" >
+	        and ORG_CODE like '%${domain.orgCode}%'
+	      </if>
+	      <if test="domain.orgName != null" >
+	        and ORG_NAME like '%${domain.orgName}%'
+	      </if>
+      </if>
+  </sql>
+  <select id="getPageList" resultMap="BaseResultMap" parameterType="hashmap" >
+    <include refid="com.zjhcsoft.common.mapper.PageMapper.PagePre" />
+    <include refid="select_sql" />
+    <include refid="com.zjhcsoft.common.mapper.PageMapper.PageEnd" />
+  </select>
+  
+  <select id="getPageCount" resultType="long" parameterType="hashmap" >
+    <include refid="com.zjhcsoft.common.mapper.PageMapper.PageCountPre" />
+    <include refid="select_sql" />
+    <include refid="com.zjhcsoft.common.mapper.PageMapper.PageCountEnd" />
+  </select>
+</mapper>

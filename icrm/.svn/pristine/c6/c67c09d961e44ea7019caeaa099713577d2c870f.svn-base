@@ -1,0 +1,17 @@
+package com.zjhcsoft.icrm.customer.mapper;
+
+import com.zjhcsoft.icrm.customer.domain.Addr;
+
+public interface AddrMapper {
+    int deleteByPrimaryKey(String rowId);
+
+    int insert(Addr record);
+
+    int insertSelective(Addr record);
+
+    Addr selectByPrimaryKey(String rowId);
+
+    int updateByPrimaryKeySelective(Addr record);
+
+    int updateByPrimaryKey(Addr record);
+}

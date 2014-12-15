@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.customer.mapper.CustomerAcctMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.customer.domain.CustomerAcct" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_PERSON" property="lastPerson" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="TIMESTAMP" />
+    <result column="ACCT_NBR" property="acctNbr" jdbcType="VARCHAR" />
+    <result column="ACCT_NAME" property="acctName" jdbcType="VARCHAR" />
+    <result column="ACCT_SIMPLE" property="acctSimple" jdbcType="VARCHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+    <result column="BRANCH_NAME" property="branchName" jdbcType="VARCHAR" />
+    <result column="BANK_ACCT" property="bankAcct" jdbcType="VARCHAR" />
+    <result column="ACCT_ADDR_ID" property="acctAddrId" jdbcType="VARCHAR" />
+    <result column="ACCT_MAIL" property="acctMail" jdbcType="VARCHAR" />
+    <result column="STS" property="sts" jdbcType="INTEGER" />
+    <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, CREATE_PERSON, CREATE_DATE, LAST_PERSON, LAST_DATE, ACCT_NBR, ACCT_NAME, 
+    ACCT_SIMPLE, CUST_ID, BRANCH_NAME, BANK_ACCT, ACCT_ADDR_ID, ACCT_MAIL, STS, STS_DATE, 
+    REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_customer_acct
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from crm_customer_acct
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.customer.domain.CustomerAcct" >
+    insert into crm_customer_acct (ROW_ID, CREATE_PERSON, CREATE_DATE, 
+      LAST_PERSON, LAST_DATE, ACCT_NBR, 
+      ACCT_NAME, ACCT_SIMPLE, CUST_ID, 
+      BRANCH_NAME, BANK_ACCT, ACCT_ADDR_ID, 
+      ACCT_MAIL, STS, STS_DATE, 
+      REMARK)
+    values (#{rowId,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastPerson,jdbcType=VARCHAR}, #{lastDate,jdbcType=TIMESTAMP}, #{acctNbr,jdbcType=VARCHAR}, 
+      #{acctName,jdbcType=VARCHAR}, #{acctSimple,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, 
+      #{branchName,jdbcType=VARCHAR}, #{bankAcct,jdbcType=VARCHAR}, #{acctAddrId,jdbcType=VARCHAR}, 
+      #{acctMail,jdbcType=VARCHAR}, #{sts,jdbcType=INTEGER}, #{stsDate,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.customer.domain.CustomerAcct" >
+    insert into crm_customer_acct
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="acctNbr != null" >
+        ACCT_NBR,
+      </if>
+      <if test="acctName != null" >
+        ACCT_NAME,
+      </if>
+      <if test="acctSimple != null" >
+        ACCT_SIMPLE,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="branchName != null" >
+        BRANCH_NAME,
+      </if>
+      <if test="bankAcct != null" >
+        BANK_ACCT,
+      </if>
+      <if test="acctAddrId != null" >
+        ACCT_ADDR_ID,
+      </if>
+      <if test="acctMail != null" >
+        ACCT_MAIL,
+      </if>
+      <if test="sts != null" >
+        STS,
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acctNbr != null" >
+        #{acctNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="acctName != null" >
+        #{acctName,jdbcType=VARCHAR},
+      </if>
+      <if test="acctSimple != null" >
+        #{acctSimple,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchName != null" >
+        #{branchName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAcct != null" >
+        #{bankAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="acctAddrId != null" >
+        #{acctAddrId,jdbcType=VARCHAR},
+      </if>
+      <if test="acctMail != null" >
+        #{acctMail,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=INTEGER},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.customer.domain.CustomerAcct" >
+    update crm_customer_acct
+    <set >
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acctNbr != null" >
+        ACCT_NBR = #{acctNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="acctName != null" >
+        ACCT_NAME = #{acctName,jdbcType=VARCHAR},
+      </if>
+      <if test="acctSimple != null" >
+        ACCT_SIMPLE = #{acctSimple,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        CUST_ID = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchName != null" >
+        BRANCH_NAME = #{branchName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAcct != null" >
+        BANK_ACCT = #{bankAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="acctAddrId != null" >
+        ACCT_ADDR_ID = #{acctAddrId,jdbcType=VARCHAR},
+      </if>
+      <if test="acctMail != null" >
+        ACCT_MAIL = #{acctMail,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        STS = #{sts,jdbcType=INTEGER},
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE = #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.customer.domain.CustomerAcct" >
+    update crm_customer_acct
+    set CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      ACCT_NBR = #{acctNbr,jdbcType=VARCHAR},
+      ACCT_NAME = #{acctName,jdbcType=VARCHAR},
+      ACCT_SIMPLE = #{acctSimple,jdbcType=VARCHAR},
+      CUST_ID = #{custId,jdbcType=VARCHAR},
+      BRANCH_NAME = #{branchName,jdbcType=VARCHAR},
+      BANK_ACCT = #{bankAcct,jdbcType=VARCHAR},
+      ACCT_ADDR_ID = #{acctAddrId,jdbcType=VARCHAR},
+      ACCT_MAIL = #{acctMail,jdbcType=VARCHAR},
+      STS = #{sts,jdbcType=INTEGER},
+      STS_DATE = #{stsDate,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  
+   
+  <resultMap id="customerAcctVOResultMap" type="com.zjhcsoft.icrm.customer.vo.CustomerAcctVO" extends="BaseResultMap">
+  		<result property="custName"  column="CUST_NAME"/>
+  		<result property="custCode"  column="CUST_CODE"/>
+  		<result property="acctAddrFull"  column="ADDR_FULL"/>
+  </resultMap>
+  <select id="getPageList" parameterType="map" resultMap="customerAcctVOResultMap">
+  	<include refid="com.zjhcsoft.common.mapper.PageMapper.PagePre"/>
+		SELECT A.*, B.CUST_NAME, C.ADDR_FULL,B.CUST_CODE
+		  FROM CRM_CUSTOMER_ACCT A
+		  LEFT OUTER JOIN CRM_CUSTOMER B ON A.CUST_ID = B.ROW_ID
+		  LEFT OUTER JOIN CRM_ADDR C ON A.ACCT_ADDR_ID = B.ROW_ID
+	    <where>
+		    <if test="domain.custName != null and domain.custName != ''">
+		    	and b.CUST_NAME like #{domain.custName,jdbcType=VARCHAR}
+		    </if>
+		    <if test="domain.custCode != null and domain.custCode != ''">
+		    	and b.CUST_CODE like #{domain.custCode,jdbcType=VARCHAR}
+		    </if>
+  			<if test="domain.addrFull != null and domain.addrFull != ''">
+		    	and c.ADDR_FULL like #{domain.addrFull,jdbcType=VARCHAR}
+		    </if>
+  			<if test="domain.acctName != null and domain.acctName != ''">
+		    	and a.ACCT_NAME = #{domain.acctName,jdbcType=VARCHAR}
+		    </if>
+  			<if test="domain.acctNbr != null and domain.acctNbr != ''">
+		    	and a.ACCT_NBR like #{domain.acctNbr,jdbcType=VARCHAR}
+		    </if>
+	    </where>
+	    order by a.create_date desc
+  	<include refid="com.zjhcsoft.common.mapper.PageMapper.PageEnd"/>
+  </select>
+  <select id="getTotalSize" parameterType="map" resultType="java.lang.Long">
+  		SELECT count(1)
+		  FROM CRM_CUSTOMER_ACCT A
+		  LEFT OUTER JOIN CRM_CUSTOMER B ON A.CUST_ID = B.ROW_ID
+		  LEFT OUTER JOIN CRM_ADDR C ON A.ACCT_ADDR_ID = B.ROW_ID
+	    <where>
+		    <if test="domain.custName != null and domain.custName != ''">
+		    	and b.CUST_NAME like #{domain.custName,jdbcType=VARCHAR}
+		    </if>
+		    <if test="domain.custCode != null and domain.custCode != ''">
+		    	and b.CUST_CODE like #{domain.custCode,jdbcType=VARCHAR}
+		    </if>
+  			<if test="domain.addrFull != null and domain.addrFull != ''">
+		    	and c.ADDR_FULL like #{domain.addrFull,jdbcType=VARCHAR}
+		    </if>
+  			<if test="domain.acctName != null and domain.acctName != ''">
+		    	and a.ACCT_NAME = #{domain.acctName,jdbcType=VARCHAR}
+		    </if>
+  			<if test="domain.acctNbr != null and domain.acctNbr != ''">
+		    	and a.ACCT_NBR like #{domain.acctNbr,jdbcType=VARCHAR}
+		    </if>
+	    </where>
+  </select>
+  
+  <select id="getCustomerAcctVOInfo" resultMap="customerAcctVOResultMap" parameterType="java.lang.String">
+  		SELECT A.*, B.CUST_NAME,B.CUST_CODE C.ADDR_FULL
+		  FROM CRM_CUSTOMER_ACCT A
+		  LEFT OUTER JOIN CRM_CUSTOMER B ON A.CUST_ID = B.ROW_ID
+		  LEFT OUTER JOIN CRM_ADDR C ON A.ACCT_ADDR_ID = B.ROW_ID
+  		  where	a.ROW_ID = #{rowId,jdbcType=VARCHAR}
+  		
+  </select>
+  
+  
+  
+</mapper>

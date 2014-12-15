@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.dynamic.mapper.CRMDynamicFormMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.dynamic.domain.CRMDynamicForm" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="FORM_DEF_ID" property="formDefId" jdbcType="VARCHAR" />
+    <result column="DATA" property="data" jdbcType="VARCHAR" />
+    <result column="DESC_TEXT" property="descText" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, FORM_DEF_ID, DATA, DESC_TEXT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_dynamic_form
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from crm_dynamic_form
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.dynamic.domain.CRMDynamicForm" >
+    insert into crm_dynamic_form (ID, FORM_DEF_ID, DATA, 
+      DESC_TEXT)
+    values (#{id,jdbcType=VARCHAR}, #{formDefId,jdbcType=VARCHAR}, #{data,jdbcType=VARCHAR}, 
+      #{descText,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.dynamic.domain.CRMDynamicForm" >
+    insert into crm_dynamic_form
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="formDefId != null" >
+        FORM_DEF_ID,
+      </if>
+      <if test="data != null" >
+        DATA,
+      </if>
+      <if test="descText != null" >
+        DESC_TEXT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="formDefId != null" >
+        #{formDefId,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null" >
+        #{data,jdbcType=VARCHAR},
+      </if>
+      <if test="descText != null" >
+        #{descText,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.dynamic.domain.CRMDynamicForm" >
+    update crm_dynamic_form
+    <set >
+      <if test="formDefId != null" >
+        FORM_DEF_ID = #{formDefId,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null" >
+        DATA = #{data,jdbcType=VARCHAR},
+      </if>
+      <if test="descText != null" >
+        DESC_TEXT = #{descText,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.dynamic.domain.CRMDynamicForm" >
+    update crm_dynamic_form
+    set FORM_DEF_ID = #{formDefId,jdbcType=VARCHAR},
+      DATA = #{data,jdbcType=VARCHAR},
+      DESC_TEXT = #{descText,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.contacts.mapper.ContactsMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.contacts.domain.Contacts" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_PERSON" property="lastPerson" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="TIMESTAMP" />
+    <result column="CONTACTS_NAME" property="contactsName" jdbcType="VARCHAR" />
+    <result column="CONTACTS_SIMPLE" property="contactsSimple" jdbcType="VARCHAR" />
+    <result column="CONTACTS_ADDR_ID" property="contactsAddrId" jdbcType="VARCHAR" />
+    <result column="DEPARTMENT" property="department" jdbcType="VARCHAR" />
+    <result column="POSITION" property="position" jdbcType="VARCHAR" />
+    <result column="BIRTHDAY" property="birthday" jdbcType="DATE" />
+    <result column="HOBBY" property="hobby" jdbcType="VARCHAR" />
+    <result column="WORK_CONTENT" property="workContent" jdbcType="VARCHAR" />
+    <result column="ASSIGN_STS" property="assignSts" jdbcType="INTEGER" />
+    <result column="ASSIGN_DATE" property="assignDate" jdbcType="TIMESTAMP" />
+    <result column="STS" property="sts" jdbcType="INTEGER" />
+    <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, CREATE_PERSON, CREATE_DATE, LAST_PERSON, LAST_DATE, CONTACTS_NAME, CONTACTS_SIMPLE, 
+    CONTACTS_ADDR_ID, DEPARTMENT, POSITION, BIRTHDAY, HOBBY, WORK_CONTENT, ASSIGN_STS, 
+    ASSIGN_DATE, STS, STS_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_contacts
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from crm_contacts
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.contacts.domain.Contacts" >
+    insert into crm_contacts (ROW_ID, CREATE_PERSON, CREATE_DATE, 
+      LAST_PERSON, LAST_DATE, CONTACTS_NAME, 
+      CONTACTS_SIMPLE, CONTACTS_ADDR_ID, DEPARTMENT, 
+      POSITION, BIRTHDAY, HOBBY, 
+      WORK_CONTENT, ASSIGN_STS, ASSIGN_DATE, 
+      STS, STS_DATE)
+    values (#{rowId,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastPerson,jdbcType=VARCHAR}, #{lastDate,jdbcType=TIMESTAMP}, #{contactsName,jdbcType=VARCHAR}, 
+      #{contactsSimple,jdbcType=VARCHAR}, #{contactsAddrId,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{hobby,jdbcType=VARCHAR}, 
+      #{workContent,jdbcType=VARCHAR}, #{assignSts,jdbcType=INTEGER}, #{assignDate,jdbcType=TIMESTAMP}, 
+      #{sts,jdbcType=INTEGER}, #{stsDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.contacts.domain.Contacts" >
+    insert into crm_contacts
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="contactsName != null" >
+        CONTACTS_NAME,
+      </if>
+      <if test="contactsSimple != null" >
+        CONTACTS_SIMPLE,
+      </if>
+      <if test="contactsAddrId != null" >
+        CONTACTS_ADDR_ID,
+      </if>
+      <if test="department != null" >
+        DEPARTMENT,
+      </if>
+      <if test="position != null" >
+        POSITION,
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY,
+      </if>
+      <if test="hobby != null" >
+        HOBBY,
+      </if>
+      <if test="workContent != null" >
+        WORK_CONTENT,
+      </if>
+      <if test="assignSts != null" >
+        ASSIGN_STS,
+      </if>
+      <if test="assignDate != null" >
+        ASSIGN_DATE,
+      </if>
+      <if test="sts != null" >
+        STS,
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contactsName != null" >
+        #{contactsName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsSimple != null" >
+        #{contactsSimple,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsAddrId != null" >
+        #{contactsAddrId,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="hobby != null" >
+        #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="workContent != null" >
+        #{workContent,jdbcType=VARCHAR},
+      </if>
+      <if test="assignSts != null" >
+        #{assignSts,jdbcType=INTEGER},
+      </if>
+      <if test="assignDate != null" >
+        #{assignDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=INTEGER},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.contacts.domain.Contacts" >
+    update crm_contacts
+    <set >
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contactsName != null" >
+        CONTACTS_NAME = #{contactsName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsSimple != null" >
+        CONTACTS_SIMPLE = #{contactsSimple,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsAddrId != null" >
+        CONTACTS_ADDR_ID = #{contactsAddrId,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        DEPARTMENT = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        POSITION = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="hobby != null" >
+        HOBBY = #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="workContent != null" >
+        WORK_CONTENT = #{workContent,jdbcType=VARCHAR},
+      </if>
+      <if test="assignSts != null" >
+        ASSIGN_STS = #{assignSts,jdbcType=INTEGER},
+      </if>
+      <if test="assignDate != null" >
+        ASSIGN_DATE = #{assignDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sts != null" >
+        STS = #{sts,jdbcType=INTEGER},
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE = #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.contacts.domain.Contacts" >
+    update crm_contacts
+    set CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      CONTACTS_NAME = #{contactsName,jdbcType=VARCHAR},
+      CONTACTS_SIMPLE = #{contactsSimple,jdbcType=VARCHAR},
+      CONTACTS_ADDR_ID = #{contactsAddrId,jdbcType=VARCHAR},
+      DEPARTMENT = #{department,jdbcType=VARCHAR},
+      POSITION = #{position,jdbcType=VARCHAR},
+      BIRTHDAY = #{birthday,jdbcType=DATE},
+      HOBBY = #{hobby,jdbcType=VARCHAR},
+      WORK_CONTENT = #{workContent,jdbcType=VARCHAR},
+      ASSIGN_STS = #{assignSts,jdbcType=INTEGER},
+      ASSIGN_DATE = #{assignDate,jdbcType=TIMESTAMP},
+      STS = #{sts,jdbcType=INTEGER},
+      STS_DATE = #{stsDate,jdbcType=TIMESTAMP}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  
+   <resultMap id="contactsVOPageResultMap" type="com.zjhcsoft.icrm.contacts.vo.ContactsVO" extends="BaseResultMap">
+  		<result property="addrFull"  column="addr_full"/>
+  		<association property="user" column="row_id" select="queryContactsPoolUser"></association>
+  </resultMap>
+  <select id="getPageList" resultMap="contactsVOPageResultMap" parameterType="map">
+  	<include refid="com.zjhcsoft.common.mapper.PageMapper.PagePre"/>
+	  	select a.*,b.addr_full
+	    from crm_contacts a
+	    left outer join crm_addr b on a.contacts_addr_id = b.row_id
+	    <where>
+		    <trim prefix="" prefixOverrides="AND | OR">  
+			    <if test="domain.contactsName != null and domain.contactsName != ''">
+			    	and  contacts_name like #{domain.contactsName,jdbcType=VARCHAR}
+			    </if>
+	  			<if test="domain.department != null and domain.department != ''">
+			    	and department like #{domain.department,jdbcType=VARCHAR}
+			    </if>
+	  			<if test="domain.assignSts != null and domain.assignSts != ''">
+			    	and assign_sts = #{domain.assignSts,jdbcType=VARCHAR}
+			    </if>
+			</trim>  
+	    </where>
+  	<include refid="com.zjhcsoft.common.mapper.PageMapper.PageEnd"/>
+  </select>
+  
+  <select id="getTotalSize" resultType="long" parameterType="map">
+  
+  		select count(1) from crm_contacts
+	    <where>
+		    <trim prefix="" prefixOverrides="AND | OR">  
+			    <if test="domain.contactsName != null and domain.contactsName != ''">
+			    	and  contacts_name like #{domain.contactsName,jdbcType=VARCHAR}
+			    </if>
+	  			<if test="domain.department != null and domain.department != ''">
+			    	and department like #{domain.department,jdbcType=VARCHAR}
+			    </if>
+	  			<if test="domain.assignSts != null and domain.assignSts != ''">
+			    	and assign_sts = #{domain.assignSts,jdbcType=VARCHAR}
+			    </if>
+			</trim>  
+	    </where>
+  </select>
+  
+  
+  
+  
+  <resultMap id="contactWayMap" type="com.zjhcsoft.icrm.contacts.domain.ContactWay">
+  	   <id property="rowId" column="constactWayRowId" />
+       <result property="contactType" column="contact_type" />
+       <result property="contactInfo" column="contact_info" />
+  </resultMap>
+  <resultMap id="contactsVOAllResultMap" type="com.zjhcsoft.icrm.contacts.vo.ContactsVO" extends="BaseResultMap">
+  		<result property="addrFull"  column="addr_full"/>
+  		<association property="customerList" column="row_id"  select="queryCustomer" ></association>
+  		<association property="contactsGroup" column="row_id" select="queryContactsGroup"></association>
+  		<association property="user" column="row_id" select="queryContactsPoolUser"></association>
+  		<collection property="contactWayList" column="constactWayRowId" ofType="com.zjhcsoft.icrm.contacts.domain.ContactWay" javaType="ArrayList" resultMap="contactWayMap"/>
+  </resultMap>
+  <select id="queryContactsGroup" resultMap="com.zjhcsoft.icrm.contacts.mapper.ContactsGroupMapper.BaseResultMap">
+  		select a.* from crm_contacts_group a,crm_contacts_group_rela b
+  		where a.row_id = b.GROUP_ID
+  		and   b.contacts_id = #{row_id}
+  </select>
+  <select id="queryCustomer" resultMap="com.zjhcsoft.icrm.customer.mapper.CustomerMapper.BaseResultMap">
+  		select a.cust_name from crm_customer a,CRM_CUST_CONTACTS_RELA b
+  		where a.row_id = b.cust_id
+  		and   b.contacts_id = #{row_id}
+  </select>
+  <select id="queryContactsPoolUser" resultMap="com.zjhcsoft.rbac.user.mapper.UserMapper.BaseResultMap">
+  		select a.REAL_NAME from tuser a,CRM_CONTACTS_POOL b
+  		where a.row_id = b.user_id
+  		and   b.contacts_id = #{row_id}
+  </select>
+  <select id="getContactsVOInfo" resultMap="contactsVOAllResultMap">
+  
+  	 select a.*,b.row_id constactWayRowId,b.contact_type,b.contact_info,c.addr_full
+	  from crm_contacts a
+	  left outer join CRM_CONTACT_WAY b on a.row_id = b.contacts_id
+  	  inner join crm_addr c on a.contacts_addr_id = c.row_id
+  	  where a.row_id = #{rowId,jdbcType=VARCHAR}
+  </select>
+  
+  
+  
+  
+  
+  
+</mapper>

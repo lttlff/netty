@@ -1,0 +1,62 @@
+package com.zjhcsoft.rbac.menu.service;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.velocity.runtime.directive.Break;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.zjhcsoft.rbac.menu.domain.Menu;
+import com.zjhcsoft.rbac.menu.domain.MenuTree;
+import com.zjhcsoft.rbac.menu.mapper.MenuMapper;
+
+@Service
+public class MenuService {
+
+	@Autowired
+	private MenuMapper menuMapper;
+	
+	
+	
+	public List<MenuTree> getMenuTree() throws IllegalAccessException, InvocationTargetException{
+		List<MenuTree> menuTreeList = new ArrayList<MenuTree>();
+		
+		List<Menu> menus = menuMapper.selectAllMenu();
+		MenuTree menuTree;
+		for(int i=0;i<menus.size();i++){
+			if("0".equals(menus.get(i).getParId())){//最上层菜单
+				menuTree = new MenuTree();
+				BeanUtils.copyProperties(menuTree, menus.get(i));
+				menuTreeList.add(menuTree);
+			}
+		}
+		setSubMenuList(menuTreeList,menus);
+		return menuTreeList;
+	}
+
+	private void setSubMenuList(List<MenuTree> menuTreeList, List<Menu> menus) throws IllegalAccessException, InvocationTargetException {
+		MenuTree menuTree;
+		List<MenuTree> subMenuTreeList = null;
+		for(int i=0;i<menuTreeList.size();i++){
+			subMenuTreeList = new ArrayList<MenuTree>();
+			for(int j=0;j<menus.size();j++){
+				if(menus.get(j).getParId().equals(menuTreeList.get(i).getId())){//最上层菜单
+					menuTree = new MenuTree();
+					BeanUtils.copyProperties(menuTree, menus.get(j));
+					subMenuTreeList.add(menuTree);
+				}
+			}
+			if(subMenuTreeList!=null){
+				menuTreeList.get(i).setSubList(subMenuTreeList);
+				setSubMenuList(subMenuTreeList,menus);
+			}
+		}
+	}
+	
+	
+	
+	
+}

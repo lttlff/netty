@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.customer.mapper.CustContactsRelaMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.customer.domain.CustContactsRela" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <result column="CRM_ROW_ID" property="crmRowId" jdbcType="VARCHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+    <result column="CONTACTS_ID" property="contactsId" jdbcType="VARCHAR" />
+    <result column="CONTACTS_TYPE" property="contactsType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, CRM_ROW_ID, CUST_ID, CONTACTS_ID, CONTACTS_TYPE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_cust_contacts_rela
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from crm_cust_contacts_rela
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.customer.domain.CustContactsRela" >
+    insert into crm_cust_contacts_rela (ROW_ID, CRM_ROW_ID, CUST_ID, 
+      CONTACTS_ID, CONTACTS_TYPE)
+    values (#{rowId,jdbcType=VARCHAR}, #{crmRowId,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, 
+      #{contactsId,jdbcType=VARCHAR}, #{contactsType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.customer.domain.CustContactsRela" >
+    insert into crm_cust_contacts_rela
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="crmRowId != null" >
+        CRM_ROW_ID,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="contactsId != null" >
+        CONTACTS_ID,
+      </if>
+      <if test="contactsType != null" >
+        CONTACTS_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="crmRowId != null" >
+        #{crmRowId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsId != null" >
+        #{contactsId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsType != null" >
+        #{contactsType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.customer.domain.CustContactsRela" >
+    update crm_cust_contacts_rela
+    <set >
+      <if test="crmRowId != null" >
+        CRM_ROW_ID = #{crmRowId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        CUST_ID = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsId != null" >
+        CONTACTS_ID = #{contactsId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsType != null" >
+        CONTACTS_TYPE = #{contactsType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.customer.domain.CustContactsRela" >
+    update crm_cust_contacts_rela
+    set CRM_ROW_ID = #{crmRowId,jdbcType=VARCHAR},
+      CUST_ID = #{custId,jdbcType=VARCHAR},
+      CONTACTS_ID = #{contactsId,jdbcType=VARCHAR},
+      CONTACTS_TYPE = #{contactsType,jdbcType=INTEGER}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  
+  <resultMap id="ExpBaseResultMap" type="com.zjhcsoft.icrm.customer.vo.CustContactsRelaVO" extends="BaseResultMap">
+  	    <result column="CONTACTS_NAME" property="contactsName" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getContactsRelaByCustId"
+  	resultMap="ExpBaseResultMap"
+  >
+  	select a.*,b.contacts_name from crm_cust_contacts_rela a
+  	left outer join  CRM_CONTACTS b
+  	on a.contacts_id = b.row_id
+  
+  </select>
+  
+  
+</mapper>

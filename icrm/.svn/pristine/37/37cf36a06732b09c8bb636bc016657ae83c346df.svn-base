@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.sale.mapper.BusinessOppMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.sale.domain.BusinessOpp" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_PERSON" property="lastPerson" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="TIMESTAMP" />
+    <result column="OPP_CODE" property="oppCode" jdbcType="VARCHAR" />
+    <result column="OPP_NAME" property="oppName" jdbcType="VARCHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+    <result column="PERIOD_ID" property="periodId" jdbcType="VARCHAR" />
+    <result column="PROD_INTENTION" property="prodIntention" jdbcType="VARCHAR" />
+    <result column="AMOUNT" property="amount" jdbcType="DOUBLE" />
+    <result column="POSSIBILITY" property="possibility" jdbcType="INTEGER" />
+    <result column="PLAN_COMPL_DATE" property="planComplDate" jdbcType="TIMESTAMP" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="COMPETITOR" property="competitor" jdbcType="VARCHAR" />
+    <result column="SOURCE" property="source" jdbcType="INTEGER" />
+    <result column="LOST_REASON" property="lostReason" jdbcType="VARCHAR" />
+    <result column="STS" property="sts" jdbcType="INTEGER" />
+    <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, CREATE_PERSON, CREATE_DATE, LAST_PERSON, LAST_DATE, OPP_CODE, OPP_NAME, CUST_ID, 
+    PERIOD_ID, PROD_INTENTION, AMOUNT, POSSIBILITY, PLAN_COMPL_DATE, USER_ID, COMPETITOR, 
+    SOURCE, LOST_REASON, STS, STS_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_business_opp
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from crm_business_opp
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.sale.domain.BusinessOpp" >
+    insert into crm_business_opp (ROW_ID, CREATE_PERSON, CREATE_DATE, 
+      LAST_PERSON, LAST_DATE, OPP_CODE, 
+      OPP_NAME, CUST_ID, PERIOD_ID, 
+      PROD_INTENTION, AMOUNT, POSSIBILITY, 
+      PLAN_COMPL_DATE, USER_ID, COMPETITOR, 
+      SOURCE, LOST_REASON, STS, 
+      STS_DATE)
+    values (#{rowId,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastPerson,jdbcType=VARCHAR}, #{lastDate,jdbcType=TIMESTAMP}, #{oppCode,jdbcType=VARCHAR}, 
+      #{oppName,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, #{periodId,jdbcType=VARCHAR}, 
+      #{prodIntention,jdbcType=VARCHAR}, #{amount,jdbcType=DOUBLE}, #{possibility,jdbcType=INTEGER}, 
+      #{planComplDate,jdbcType=TIMESTAMP}, #{userId,jdbcType=VARCHAR}, #{competitor,jdbcType=VARCHAR}, 
+      #{source,jdbcType=INTEGER}, #{lostReason,jdbcType=VARCHAR}, #{sts,jdbcType=INTEGER}, 
+      #{stsDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.sale.domain.BusinessOpp" >
+    insert into crm_business_opp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="oppCode != null" >
+        OPP_CODE,
+      </if>
+      <if test="oppName != null" >
+        OPP_NAME,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="periodId != null" >
+        PERIOD_ID,
+      </if>
+      <if test="prodIntention != null" >
+        PROD_INTENTION,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="possibility != null" >
+        POSSIBILITY,
+      </if>
+      <if test="planComplDate != null" >
+        PLAN_COMPL_DATE,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="competitor != null" >
+        COMPETITOR,
+      </if>
+      <if test="source != null" >
+        SOURCE,
+      </if>
+      <if test="lostReason != null" >
+        LOST_REASON,
+      </if>
+      <if test="sts != null" >
+        STS,
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oppCode != null" >
+        #{oppCode,jdbcType=VARCHAR},
+      </if>
+      <if test="oppName != null" >
+        #{oppName,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="periodId != null" >
+        #{periodId,jdbcType=VARCHAR},
+      </if>
+      <if test="prodIntention != null" >
+        #{prodIntention,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="possibility != null" >
+        #{possibility,jdbcType=INTEGER},
+      </if>
+      <if test="planComplDate != null" >
+        #{planComplDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="competitor != null" >
+        #{competitor,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=INTEGER},
+      </if>
+      <if test="lostReason != null" >
+        #{lostReason,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=INTEGER},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.sale.domain.BusinessOpp" >
+    update crm_business_opp
+    <set >
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oppCode != null" >
+        OPP_CODE = #{oppCode,jdbcType=VARCHAR},
+      </if>
+      <if test="oppName != null" >
+        OPP_NAME = #{oppName,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        CUST_ID = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="periodId != null" >
+        PERIOD_ID = #{periodId,jdbcType=VARCHAR},
+      </if>
+      <if test="prodIntention != null" >
+        PROD_INTENTION = #{prodIntention,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="possibility != null" >
+        POSSIBILITY = #{possibility,jdbcType=INTEGER},
+      </if>
+      <if test="planComplDate != null" >
+        PLAN_COMPL_DATE = #{planComplDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="competitor != null" >
+        COMPETITOR = #{competitor,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        SOURCE = #{source,jdbcType=INTEGER},
+      </if>
+      <if test="lostReason != null" >
+        LOST_REASON = #{lostReason,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        STS = #{sts,jdbcType=INTEGER},
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE = #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.sale.domain.BusinessOpp" >
+    update crm_business_opp
+    set CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      OPP_CODE = #{oppCode,jdbcType=VARCHAR},
+      OPP_NAME = #{oppName,jdbcType=VARCHAR},
+      CUST_ID = #{custId,jdbcType=VARCHAR},
+      PERIOD_ID = #{periodId,jdbcType=VARCHAR},
+      PROD_INTENTION = #{prodIntention,jdbcType=VARCHAR},
+      AMOUNT = #{amount,jdbcType=DOUBLE},
+      POSSIBILITY = #{possibility,jdbcType=INTEGER},
+      PLAN_COMPL_DATE = #{planComplDate,jdbcType=TIMESTAMP},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      COMPETITOR = #{competitor,jdbcType=VARCHAR},
+      SOURCE = #{source,jdbcType=INTEGER},
+      LOST_REASON = #{lostReason,jdbcType=VARCHAR},
+      STS = #{sts,jdbcType=INTEGER},
+      STS_DATE = #{stsDate,jdbcType=TIMESTAMP}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,160 @@
+package com.zjhcsoft.rbac.permission.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang.StringUtils;
+import org.aspectj.apache.bcel.classfile.Constant;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.zjhcsoft.common.BaseController;
+import com.zjhcsoft.common.page.Page;
+import com.zjhcsoft.common.util.AppConstant;
+import com.zjhcsoft.common.util.ResponseEnvelope;
+import com.zjhcsoft.rbac.permission.domain.Permission;
+import com.zjhcsoft.rbac.role.domain.Role;
+import com.zjhcsoft.rpc.RequestDeployRoute;
+import com.zjhcsoft.rpc.context.impl.ResponseContext;
+
+/**
+ * @date 2014-6-12 下午03:53:28
+ * @Title: PermssionController.java
+ * @author lff
+ */
+@Controller
+@RequestMapping("/permission")
+public class PermissionController extends BaseController {
+	private static final String permissionService = "permissionService";
+
+	/**
+	 * 跳转页面
+	 * 
+	 * @date 2014-6-12 下午03:57:03
+	 * @author lff
+	 * @return
+	 */
+	@RequestMapping("/index")
+	public String index(ModelMap modelMap, Permission permission,
+			HttpServletRequest request, HttpServletResponse response) {
+		// 加载数据
+		this.loadPageDataList(modelMap, permission, request);
+		return "/rbac/permission/permission";
+	}
+
+	/**
+	 * 加载数据
+	 * 
+	 * @date 2014-6-12 下午04:00:17
+	 * @author lff
+	 * @param modelMap
+	 * @param permission
+	 */
+	public void loadPageDataList(ModelMap modelMap, Permission permission,
+			HttpServletRequest request) {
+		Map<Object, Object> paramMap = new HashMap<Object, Object>();
+		paramMap.put("permission", permission);
+		ResponseContext result = RequestDeployRoute.call(AppConstant.APP1,
+				permissionService, "getPageCount", paramMap);
+		if (result != null) {
+			long totalCount = (Long) result.get();
+			Page page = super.executePage(request, totalCount);
+			paramMap.put("start", (page.getCurrentPage() - 1)
+					* page.getEveryPage());
+			paramMap.put("limit", page.getEveryPage());
+			result = RequestDeployRoute.call(AppConstant.APP1,
+					permissionService, "getPageList", paramMap);
+			List<Permission> list = (List<Permission>) result.get();
+			String[] field_codes = new String[] { "tpermission-per_type" };
+			super.setDicTextInList(list, field_codes);
+			page.setDataList(list);
+			modelMap.addAttribute("page", page);
+			modelMap.addAttribute("permission", permission);
+		}
+	}
+	/**
+	 * 删除
+	 * @date 2014-6-13 上午09:53:03
+	 * @author lff
+	 * @param ids
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/deleteList")
+	public ResponseEnvelope deleteList(String[] ids, HttpServletRequest request) {
+		ResponseEnvelope re = new ResponseEnvelope();
+		try{
+			Map paramMap = new HashMap();
+			paramMap.put("ids", StringUtils.join(ids));
+			RequestDeployRoute.call(AppConstant.APP1,
+					permissionService, "deleteLogicList", paramMap);
+			
+			re.setMessage("删除成功!");
+			re.setState(true);
+		}catch(Exception e){
+			e.printStackTrace();
+			re.setMessage("删除失败!"+e.getMessage());
+			re.setState(false);
+		}
+		return re;
+	}
+	/**
+	 * 跳转编辑页面
+	 * @date 2014-6-13 上午10:14:34
+	 * @author lff
+	 * @param modelMap
+	 * @param id
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/doEdit")
+	public String doEdit(ModelMap modelMap, String id,
+			HttpServletRequest request, HttpServletResponse response){
+		if (StringUtils.isNotEmpty(id)) {
+			Map<Object, Object> paramMap = new HashMap<Object, Object>();
+			paramMap.put("id", id);
+			ResponseContext result = RequestDeployRoute.call(AppConstant.APP1,
+					permissionService, "getById", paramMap);
+			if (result != null) {
+				Permission permission = (Permission) result.getResult();
+				modelMap.addAttribute("permission", permission);
+				modelMap.addAttribute("type", "modify");
+			}
+		} else {
+			modelMap.addAttribute("type", "add");
+		}
+		
+		//下拉框
+		String[] field_codes = new String[] { "per_type" };
+		super.addDicList(request, "tpermission", field_codes);
+		return "/rbac/permission/permission_form";
+	}
+	
+	@RequestMapping("/addPermission")
+	@ResponseBody
+	public ResponseEnvelope addPermission(ModelMap modelMap, Permission permission,
+			HttpServletRequest request, HttpServletResponse response){
+		ResponseEnvelope re = new ResponseEnvelope();
+		try{
+			Map<Object, Object> paramMap = new HashMap<Object, Object>();
+			paramMap.put("permission", permission);
+			ResponseContext result = RequestDeployRoute.call(AppConstant.APP1,
+					permissionService, "insertPermission", paramMap);
+			re.setMessage("添加成功!");
+			re.setState(true);
+		}catch(Exception e){
+			e.printStackTrace();
+			re.setMessage("添加失败!"+e.getMessage());
+			re.setState(false);
+		}
+		return re;
+	}
+}

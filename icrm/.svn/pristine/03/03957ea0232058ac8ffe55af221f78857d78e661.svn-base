@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container-fluid">
+	<form name="test_form" class="form-horizontal" role="form">
+		<div class="span6 column">
+			<div class="control-group">
+				 <label class="control-label" for="eff_date">上市时间</label>
+				<div class="controls">
+					<div class="input-append date">
+						<input id="eff_date" name="eff_date" type="text" /> <span class="add-on"><em class="icon-calendar"></em></span>
+					</div>
+					<div class="input-append date">
+						<input type="text" /> <span class="add-on"><em class="icon-calendar"></em></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="span6 column">
+		</div>
+	</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.dynamic.mapper.SFormFieldRelMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.dynamic.domain.SFormFieldRel" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="form_def_id" property="formDefId" jdbcType="VARCHAR" />
+    <result column="field_def_id" property="fieldDefId" jdbcType="VARCHAR" />
+    <result column="allowblank_flg" property="allowblankFlg" jdbcType="CHAR" />
+    <result column="default_val" property="defaultVal" jdbcType="CHAR" />
+    <result column="hidden_flg" property="hiddenFlg" jdbcType="CHAR" />
+    <result column="readonly_flg" property="readonlyFlg" jdbcType="CHAR" />
+    <result column="group_id" property="groupId" jdbcType="VARCHAR" />
+    <result column="order_by" property="orderBy" jdbcType="DECIMAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zjhcsoft.icrm.dynamic.domain.SFormFieldRel" extends="BaseResultMap" >
+    <result column="dynamic_script" property="dynamicScript" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, form_def_id, field_def_id, allowblank_flg, default_val, hidden_flg, readonly_flg, 
+    group_id, order_by
+  </sql>
+  <sql id="Blob_Column_List" >
+    dynamic_script
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from s_form_field_rel
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from s_form_field_rel
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.dynamic.domain.SFormFieldRel" >
+    insert into s_form_field_rel (id, form_def_id, field_def_id, 
+      allowblank_flg, default_val, hidden_flg, 
+      readonly_flg, group_id, order_by, 
+      dynamic_script)
+    values (#{id,jdbcType=VARCHAR}, #{formDefId,jdbcType=VARCHAR}, #{fieldDefId,jdbcType=VARCHAR}, 
+      #{allowblankFlg,jdbcType=CHAR}, #{defaultVal,jdbcType=CHAR}, #{hiddenFlg,jdbcType=CHAR}, 
+      #{readonlyFlg,jdbcType=CHAR}, #{groupId,jdbcType=VARCHAR}, #{orderBy,jdbcType=DECIMAL}, 
+      #{dynamicScript,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.dynamic.domain.SFormFieldRel" >
+    insert into s_form_field_rel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="formDefId != null" >
+        form_def_id,
+      </if>
+      <if test="fieldDefId != null" >
+        field_def_id,
+      </if>
+      <if test="allowblankFlg != null" >
+        allowblank_flg,
+      </if>
+      <if test="defaultVal != null" >
+        default_val,
+      </if>
+      <if test="hiddenFlg != null" >
+        hidden_flg,
+      </if>
+      <if test="readonlyFlg != null" >
+        readonly_flg,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="orderBy != null" >
+        order_by,
+      </if>
+      <if test="dynamicScript != null" >
+        dynamic_script,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="formDefId != null" >
+        #{formDefId,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldDefId != null" >
+        #{fieldDefId,jdbcType=VARCHAR},
+      </if>
+      <if test="allowblankFlg != null" >
+        #{allowblankFlg,jdbcType=CHAR},
+      </if>
+      <if test="defaultVal != null" >
+        #{defaultVal,jdbcType=CHAR},
+      </if>
+      <if test="hiddenFlg != null" >
+        #{hiddenFlg,jdbcType=CHAR},
+      </if>
+      <if test="readonlyFlg != null" >
+        #{readonlyFlg,jdbcType=CHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        #{orderBy,jdbcType=DECIMAL},
+      </if>
+      <if test="dynamicScript != null" >
+        #{dynamicScript,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.dynamic.domain.SFormFieldRel" >
+    update s_form_field_rel
+    <set >
+      <if test="formDefId != null" >
+        form_def_id = #{formDefId,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldDefId != null" >
+        field_def_id = #{fieldDefId,jdbcType=VARCHAR},
+      </if>
+      <if test="allowblankFlg != null" >
+        allowblank_flg = #{allowblankFlg,jdbcType=CHAR},
+      </if>
+      <if test="defaultVal != null" >
+        default_val = #{defaultVal,jdbcType=CHAR},
+      </if>
+      <if test="hiddenFlg != null" >
+        hidden_flg = #{hiddenFlg,jdbcType=CHAR},
+      </if>
+      <if test="readonlyFlg != null" >
+        readonly_flg = #{readonlyFlg,jdbcType=CHAR},
+      </if>
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        order_by = #{orderBy,jdbcType=DECIMAL},
+      </if>
+      <if test="dynamicScript != null" >
+        dynamic_script = #{dynamicScript,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zjhcsoft.icrm.dynamic.domain.SFormFieldRel" >
+    update s_form_field_rel
+    set form_def_id = #{formDefId,jdbcType=VARCHAR},
+      field_def_id = #{fieldDefId,jdbcType=VARCHAR},
+      allowblank_flg = #{allowblankFlg,jdbcType=CHAR},
+      default_val = #{defaultVal,jdbcType=CHAR},
+      hidden_flg = #{hiddenFlg,jdbcType=CHAR},
+      readonly_flg = #{readonlyFlg,jdbcType=CHAR},
+      group_id = #{groupId,jdbcType=VARCHAR},
+      order_by = #{orderBy,jdbcType=DECIMAL},
+      dynamic_script = #{dynamicScript,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.dynamic.domain.SFormFieldRel" >
+    update s_form_field_rel
+    set form_def_id = #{formDefId,jdbcType=VARCHAR},
+      field_def_id = #{fieldDefId,jdbcType=VARCHAR},
+      allowblank_flg = #{allowblankFlg,jdbcType=CHAR},
+      default_val = #{defaultVal,jdbcType=CHAR},
+      hidden_flg = #{hiddenFlg,jdbcType=CHAR},
+      readonly_flg = #{readonlyFlg,jdbcType=CHAR},
+      group_id = #{groupId,jdbcType=VARCHAR},
+      order_by = #{orderBy,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  	<resultMap type="com.zjhcsoft.icrm.dynamic.domain.SFormFieldRel" id="formFieldRelResultMap" extends="BaseResultMap">
+	</resultMap>
+  <select id="selectAllEffective" resultMap="formFieldRelResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from s_form_field_rel 
+    where status = '1' order by form_def_id ,order_by asc
+  
+  </select>
+  
+  
+  
+  
+  <select id="selectByFormId" resultMap="ResultMapWithBLOBs" parameterType="string">
+  	select *
+    from s_form_field_rel a
+    where status = '1'
+    and form_def_id = #{form_def_id}
+    order by form_def_id ,order_by asc
+  </select>
+  
+  
+</mapper>

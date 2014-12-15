@@ -1,0 +1,117 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html>
+<head>
+	<%@ include file="/resources/jsp/jquery.form.jsp" %>
+	
+	<title>用户管理-编辑</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="description" content="用户管理-编辑">
+	<script type="text/javascript" src="<%=basePath%>resources/js/My97DatePicker/WdatePicker.js" ></script>
+	<script type="text/javascript" src="<%=basePath%>rbac/user/user.form.js"></script>
+</head>
+
+<body>
+<div class="container">
+	<div class="prom_cont bdr">
+		<div class="title">
+	      <h2 id="userTitle">用户信息-</h2>
+	      <div class="fr tit_r">
+	      		  <a class="btn btn-s03"  href="<%=basePath%>userController/index.do">返回</a>
+			      <input type="submit" class="btn btn-s03" id="userSubmit" value="保存" />
+		     </div>
+	    </div>
+	    <form action='<c:url value="/userController/submitEdit.do"></c:url>'  id="userForm" method="post">
+			<ul class="list_4rd">
+				<li><div class="txt"><font color="red">*</font>姓名：</div>
+					<input type="hidden" id="rowId" name="rowId" value="${user.rowId}"  />
+					<input type="text" class="tt" id="realName" name="realName" value="${user.realName}"/>
+			    </li>
+				<li><div class="txt"><font color="red">*</font>帐号：</div>
+					<input type="text" class="tt" id="userName" name="userName" value="${user.userName}" />
+			    </li>
+				<li><div class="txt">部门：</div>
+					<input type='text' class='tt trigger' readOnly="true" id="deptName" name='deptName' value="${user.deptName}"/>
+					<input type="hidden" id="deptId" name="deptId" value="${user.deptId}"   />
+			    </li>
+				<li><div class="txt">有效期：</div>
+					<input type="text" class="tt Wdate" id="expireDate" name="expireDate" value="${user.expireDateStr}" onClick="WdatePicker()"/>
+			    </li>
+				<li><div class="txt">移动电话：</div>
+					<input type="text" class="tt" id="mobilePhone" name="mobilePhone"  value="${user.mobilePhone}"/>
+			    </li>
+				<li><div class="txt">固定电话：</div>
+					<input type="text" class="tt" id="comPhone" name="comPhone" value="${user.comPhone}"    />
+			    </li>
+				<li><div class="txt">电子邮件：</div>
+					<input type="text" class="tt" id="userEmail" name="userEmail" value="${user.userEmail}"    />
+			    </li>
+				<li><div class="txt">&nbsp;</div>
+					<input class="ck" type="checkbox" id="getMessage" name="getMessage" <c:if test="${user.getMessage =='1'}">checked="checked"</c:if> />是否接收短信
+				</li>
+				<li><div class="txt">用户类型:</div>
+					<select class="st" id="userType" name="userType" >
+				          <c:forEach var="dic" items="${userTypeDicList}" varStatus="status">
+				          		<c:choose>
+							    <c:when test="${user.userType == dic.value}">
+							    	<option value="${dic.value}" selected="selected">${dic.text}</option>
+							    </c:when>
+							    <c:otherwise>
+									<option value="${dic.value}" >${dic.text}</option>
+								</c:otherwise>
+							</c:choose>
+				          </c:forEach>
+			        </select>
+				</li>
+			</ul>
+	    </form>
+	</div>
+	<table width="95%" align="center" border="0" cellspacing="1" cellpadding="1" id="userRolesTable"> 
+	   <tr>
+	        <td>可选角色 </td>
+	        <td>&nbsp;</td>
+			<td>已选角色</td>
+       </tr>
+	   <tr>
+        <td> 
+        	<select name="possible" size="10" MULTIPLE width=300 style="width:300px">
+		      <c:forEach var="role" items="${unhaveRoleList}" varStatus="status">
+				  <option value='${role.rowId}'>
+				      ${role.roleName}
+				  </option>
+			  </c:forEach>
+		    </select>
+		</td>
+        <td>
+		        <input type="button" name="to" value=">>>"
+		          onClick="copySelect('possible','roles')" class="button2"/>
+		      <br/><br/>
+		      <input type="button" name="from" value="<<<"
+		          onClick="copySelect('roles','possible')" class="button2"/>
+       	</td>
+        <td>
+        	<select id="roles" name="roles" size="10" MULTIPLE width=300 style="width:300px"> 
+        		<c:forEach var="role" items="${haveRoleList}" varStatus="status">
+					  <option value='${role.rowId}'>
+					      ${role.roleName}
+					  </option>
+				  </c:forEach>
+        	</select>
+        </td>
+      </tr>
+    </table>
+</div>
+<div id="deptDiv">
+	<iframe src="" width="99%"  height="435px" style="display: none;" id="dept_iframe" name="dept_iframe"></iframe>
+</div>
+</body>
+<script type="text/javascript" >
+	if("a"=="${type}"){
+		$("#userTitle").html($("#userTitle").html()+"新增");
+	}else{
+		$("#userTitle").html($("#userTitle").html()+"修改");
+	}
+</script>
+</html>

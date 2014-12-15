@@ -1,0 +1,88 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html>
+<head>
+<%@ include file="/resources/jsp/jquery.form.jsp" %>
+<title>地址信息</title>
+
+</head>
+<body>
+	<div style="width:780px;">
+		<form action="<%=basePath%>addrController/submitEdit.do"  id="mainForm" method="post">
+			<div class="prom_cont bdr">
+				<div class="title">
+				     <h2 id="top_title">地址信息-</h2>
+				     <div class="fr tit_r">
+    		     	 	<input type="button" class="btn btn-s03" id="tt_goback" value="返回"/>
+			     		<input type="button" class="btn btn-s03" id="doSubmit" value="保存" />
+				     </div>
+				 </div>
+			</div>
+			 <div id="content">
+			     <input type="hidden" name="rowId" value="${domain.rowId}"  />
+			     <input type="hidden" name="parentAddrId" value="${parentAddrId}" readonly="readonly"    />
+			            详细地址：${parentAddrFull} 
+			     <br/>         
+	             <textarea  placeholder="不需要重复填写省市区" id="address" name="address" rows="5" cols="300"></textarea>
+			 </div>
+		</form>
+	</div>
+</body>
+<script type="text/javascript">
+	$(function(){
+		if("a"=="${type}"){
+			$("#top_title").html($("#top_title").html()+"新增");
+		}else{
+			$("#top_title").html($("#top_title").html()+"修改");
+		}
+		
+		$("#tt_goback").bind('click',function(){
+			window.location.href=basePath + "addrController/addressList.do?parentAddrId=${parentAddrId}";
+		});
+
+		var $mainForm = $("#mainForm");
+		$mainForm.ajaxForm({
+			'dataType' : 'json',
+			"clearForm" : false, // true的话
+			// 提交完成之后会清空表单中的数据，默认不写和false就不清空
+			"beforeSubmit" : function(formData, jqForm, options) { // 表单提交之前做一些操作
+				
+			},
+			'success' : function(_json) {
+				if(_json.success==false){
+					$.msgBox.info(_json.message);
+				}else{
+					$.msgBox.question(_json.message+",是否继续修改?", function(isYES) {
+						if (isYES) {
+							window.location.href= basePath+'addrController/doEdit/'+_json.data+'.do';
+						}else{
+							window.location.href= basePath+'addrController/addressList.do?parentAddrId=${parentAddrId}';
+						}
+					});
+				}
+				
+				
+			}
+		});
+		jQuery.validator.messages.required = "";
+		$mainForm.validate({
+					rules : {
+					
+					}
+				});
+		$("#doSubmit").bind('click', function() {
+			if ($mainForm.valid()) {
+				try{
+					$mainForm.submit();
+				}catch(e){
+					alert(e);
+				}
+			}
+		});
+	});
+
+</script>
+</html>

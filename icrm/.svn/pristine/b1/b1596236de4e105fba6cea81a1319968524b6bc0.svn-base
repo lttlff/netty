@@ -1,0 +1,69 @@
+package com.zjhcsoft.icrm.customer.domain;
+
+import java.io.Serializable;
+
+public class CustContactsRela implements Serializable{
+    private static final long serialVersionUID = -301567361893755324L;
+
+	private String rowId;
+
+    private String crmRowId;
+
+    private String custId;
+
+    private String contactsId;
+
+    private Integer contactsType;
+
+    private String contactsType_text;
+    
+    
+    public String getRowId() {
+        return rowId;
+    }
+
+    public void setRowId(String rowId) {
+        this.rowId = rowId == null ? null : rowId.trim();
+    }
+
+    public String getCrmRowId() {
+        return crmRowId;
+    }
+
+    public void setCrmRowId(String crmRowId) {
+        this.crmRowId = crmRowId == null ? null : crmRowId.trim();
+    }
+
+    public String getCustId() {
+        return custId;
+    }
+
+    public void setCustId(String custId) {
+        this.custId = custId == null ? null : custId.trim();
+    }
+
+    public String getContactsId() {
+        return contactsId;
+    }
+
+    public void setContactsId(String contactsId) {
+        this.contactsId = contactsId == null ? null : contactsId.trim();
+    }
+
+    public Integer getContactsType() {
+        return contactsType;
+    }
+
+    public void setContactsType(Integer contactsType) {
+        this.contactsType = contactsType;
+    }
+
+	public String getContactsType_text() {
+		return contactsType_text;
+	}
+
+	public void setContactsType_text(String contactsType_text) {
+		this.contactsType_text = contactsType_text;
+	}
+    
+}

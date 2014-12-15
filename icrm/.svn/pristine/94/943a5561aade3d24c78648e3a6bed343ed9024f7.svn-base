@@ -1,0 +1,82 @@
+package com.zjhcsoft.rpc;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import com.zjhcsoft.rpc.cfg.DeployXmlConfigure;
+import com.zjhcsoft.rpc.cfg.domain.AppDefDomain;
+import com.zjhcsoft.rpc.cfg.domain.DeployDomain;
+import com.zjhcsoft.rpc.context.impl.RequestContext;
+import com.zjhcsoft.rpc.context.impl.ResponseContext;
+import com.zjhcsoft.rpc.exception.ServiceInvokeException;
+import com.zjhcsoft.rpc.tcp.nio.DefaultTcpNettyNioClient;
+
+public class RequestDeployRoute {
+	private static List<AppDefDomain> appDefList;
+	private static DefaultTcpNettyNioClient client = new DefaultTcpNettyNioClient();
+	static {
+		appDefList = DeployXmlConfigure.getAllApp().getAppDefDomainList();
+		// DeployMonitor.main(null);//启动心跳检测线程
+	}
+
+	private static RequestContext deployRoute(String appName,
+			String className, String methodName, Map<Object, Object> paramMap) {
+		// 这里应该把默认headaMap注入进来
+		RequestContext rpcParam = new RequestContext();
+		rpcParam.setClassName(className);
+		rpcParam.setMethodName(methodName);
+		rpcParam.setAttributes(paramMap);
+
+		DeployDomain deployDomain = null;
+		try {
+			deployDomain = RequestDeployRoute.getDeployServer(appName);
+		} catch (ServiceInvokeException e) {
+			throw new ServiceInvokeException(e);
+		}
+
+		rpcParam.setDeployDomain(deployDomain);
+
+		return rpcParam;
+
+	}
+	
+	public static ResponseContext call(String appName,String className,String methodName,Map<Object,Object> paramMap){
+		return (ResponseContext) client.call(deployRoute(appName,className,methodName,paramMap));
+	}
+
+	private static DeployDomain getDeployServer(String appName) {
+		if (appDefList != null && appDefList.size() != 0) {
+			for (AppDefDomain appDef : appDefList) {
+				if (appName != null
+						&& appName.equalsIgnoreCase(appDef.getAppName().trim())) {
+					// 这里只管获取，如果有死亡节点自动会被心跳检测线程识别并清除出队列
+					List<DeployDomain> deployList = appDef.getDeployList();
+					DeployDomain deploy = null;
+					int deployListSize = deployList.size();
+					if (deployList == null || deployListSize == 0) {
+						throw new ServiceInvokeException("该模块没有可提供服务的部署实例!!");
+					} else {
+						if (deployListSize > 1) {
+							Random random = new Random();
+							int i = (Math.abs(random.nextInt()))
+									% deployList.size();
+							deploy = deployList.get(i);
+						} else {
+							deploy = deployList.get(0);
+						}
+						// 在随机路由的时候给它赋值，达到相互引用
+						deploy.setAppDefDomain(appDef);
+						if (!deploy.isDead()) {
+							return deploy;
+						}
+						// if chosed is dead
+						throw new ServiceInvokeException("该模块没有可提供服务的部署实例!!");
+					}
+				}
+				throw new ServiceInvokeException("调用模块名称不能为空!!");
+			}
+		}
+		throw new ServiceInvokeException("没有可提供服务的部署实例!!");
+	}
+}

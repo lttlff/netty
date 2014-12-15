@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.rbac.menu.mapper.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.rbac.menu.domain.Menu" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="MENU_NAME" property="menuName" jdbcType="VARCHAR" />
+    <result column="MENU_DESC" property="menuDesc" jdbcType="VARCHAR" />
+    <result column="PAR_ID" property="parId" jdbcType="VARCHAR" />
+    <result column="MENU_URL" property="menuUrl" jdbcType="VARCHAR" />
+    <result column="LEAF_FLG" property="leafFlg" jdbcType="CHAR" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="DATE" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="DATE" />
+    <result column="DEL_FLG" property="delFlg" jdbcType="CHAR" />
+    <result column="MENU_TYPE" property="menuType" jdbcType="VARCHAR" />
+    <result column="MENU_LEVEL" property="menuLevel" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, MENU_NAME, MENU_DESC, PAR_ID, MENU_URL, LEAF_FLG, CREATE_USER, CREATE_DATE, UPDATE_USER, 
+    UPDATE_DATE, DEL_FLG, MENU_TYPE, MENU_LEVEL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_menu
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_menu
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.rbac.menu.domain.Menu" >
+    insert into sys_menu (ID, MENU_NAME, MENU_DESC, 
+      PAR_ID, MENU_URL, LEAF_FLG, 
+      CREATE_USER, CREATE_DATE, UPDATE_USER, 
+      UPDATE_DATE, DEL_FLG, MENU_TYPE, 
+      MENU_LEVEL)
+    values (#{id,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{menuDesc,jdbcType=VARCHAR}, 
+      #{parId,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, #{leafFlg,jdbcType=CHAR}, 
+      #{createUser,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=DATE}, #{delFlg,jdbcType=CHAR}, #{menuType,jdbcType=VARCHAR}, 
+      #{menuLevel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.rbac.menu.domain.Menu" >
+    insert into sys_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="menuName != null" >
+        MENU_NAME,
+      </if>
+      <if test="menuDesc != null" >
+        MENU_DESC,
+      </if>
+      <if test="parId != null" >
+        PAR_ID,
+      </if>
+      <if test="menuUrl != null" >
+        MENU_URL,
+      </if>
+      <if test="leafFlg != null" >
+        LEAF_FLG,
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="updateUser != null" >
+        UPDATE_USER,
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE,
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG,
+      </if>
+      <if test="menuType != null" >
+        MENU_TYPE,
+      </if>
+      <if test="menuLevel != null" >
+        MENU_LEVEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuDesc != null" >
+        #{menuDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parId != null" >
+        #{parId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="leafFlg != null" >
+        #{leafFlg,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="menuType != null" >
+        #{menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="menuLevel != null" >
+        #{menuLevel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.rbac.menu.domain.Menu" >
+    update sys_menu
+    <set >
+      <if test="menuName != null" >
+        MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuDesc != null" >
+        MENU_DESC = #{menuDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parId != null" >
+        PAR_ID = #{parId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="leafFlg != null" >
+        LEAF_FLG = #{leafFlg,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateUser != null" >
+        UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE = #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="menuType != null" >
+        MENU_TYPE = #{menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="menuLevel != null" >
+        MENU_LEVEL = #{menuLevel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.rbac.menu.domain.Menu" >
+    update sys_menu
+    set MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      MENU_DESC = #{menuDesc,jdbcType=VARCHAR},
+      PAR_ID = #{parId,jdbcType=VARCHAR},
+      MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      LEAF_FLG = #{leafFlg,jdbcType=CHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=DATE},
+      UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      UPDATE_DATE = #{updateDate,jdbcType=DATE},
+      DEL_FLG = #{delFlg,jdbcType=CHAR},
+      MENU_TYPE = #{menuType,jdbcType=VARCHAR},
+      MENU_LEVEL = #{menuLevel,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  <select id="selectAllMenu" resultMap="BaseResultMap">
+  	
+  	select * from sys_menu T WHERE T.DEL_FLG = '0'
+  
+  </select>
+  
+  
+  
+</mapper>

@@ -1,0 +1,22 @@
+#hibernate.dialect=org.hibernate.dialect.MySQLDialect
+hibernate.dialect=org.hibernate.dialect.OracleDialect
+#driverClassName=oracle.jdbc.driver.OracleDriver
+driverClassName=com.p6spy.engine.spy.P6SpyDriver
+validationQuery=SELECT 1
+#jdbc_url=jdbc:mysql://10.80.8.58:3306/icrm?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+#jdbc_username=root
+#jdbc_password=123456
+jdbc_url=jdbc:oracle:thin:@134.96.82.218:1521:PPM
+jdbc_username=icrm
+jdbc_password=icrm
+
+hibernate.hbm2ddl.auto=update
+hibernate.show_sql=true
+hibernate.format_sql=true
+
+sessionInfoName=sessionInfo
+
+uploadFieldName=filedata
+uploadFileMaxSize=20971520
+uploadFileExts=txt,rar,zip,doc,docx,xls,xlsx,jpg,jpeg,gif,png,swf,wmv,avi,wma,mp3,mid
+uploadDirectory=attached

@@ -1,0 +1,138 @@
+package com.zjhcsoft.rbac.menu.domain;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class Menu implements Serializable{
+	private static final long serialVersionUID = 5675839011782572299L;
+
+	private String id;
+
+    private String menuName;
+
+    private String menuDesc;
+
+    private String parId;
+
+    private String menuUrl;
+
+    private String leafFlg;
+
+    private String createUser;
+
+    private Date createDate;
+
+    private String updateUser;
+
+    private Date updateDate;
+
+    private String delFlg;
+
+    private String menuType;
+
+    private Integer menuLevel;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
+    }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName == null ? null : menuName.trim();
+    }
+
+    public String getMenuDesc() {
+        return menuDesc;
+    }
+
+    public void setMenuDesc(String menuDesc) {
+        this.menuDesc = menuDesc == null ? null : menuDesc.trim();
+    }
+
+    public String getParId() {
+        return parId;
+    }
+
+    public void setParId(String parId) {
+        this.parId = parId == null ? null : parId.trim();
+    }
+
+    public String getMenuUrl() {
+        return menuUrl;
+    }
+
+    public void setMenuUrl(String menuUrl) {
+        this.menuUrl = menuUrl == null ? null : menuUrl.trim();
+    }
+
+    public String getLeafFlg() {
+        return leafFlg;
+    }
+
+    public void setLeafFlg(String leafFlg) {
+        this.leafFlg = leafFlg == null ? null : leafFlg.trim();
+    }
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser == null ? null : createUser.trim();
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser == null ? null : updateUser.trim();
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public String getDelFlg() {
+        return delFlg;
+    }
+
+    public void setDelFlg(String delFlg) {
+        this.delFlg = delFlg == null ? null : delFlg.trim();
+    }
+
+    public String getMenuType() {
+        return menuType;
+    }
+
+    public void setMenuType(String menuType) {
+        this.menuType = menuType == null ? null : menuType.trim();
+    }
+
+    public Integer getMenuLevel() {
+        return menuLevel;
+    }
+
+    public void setMenuLevel(Integer menuLevel) {
+        this.menuLevel = menuLevel;
+    }
+}

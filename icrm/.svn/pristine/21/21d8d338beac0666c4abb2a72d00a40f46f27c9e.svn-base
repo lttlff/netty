@@ -1,0 +1,78 @@
+.jquery-msgbox {
+	background: url("../images2/msg.background.png") repeat-x scroll left
+		bottom rgba(0, 0, 0, 0);
+	padding-bottom: 55px;
+}
+
+.jquery-msgbox-wrapper {
+	padding: 20px 20px 5px 100px;
+}
+
+.jquery-msgbox-buttons {
+	bottom: 0;
+	padding: 15px;
+	position: absolute;
+	right: 0;
+	text-align: right;
+}
+
+.jquery-msgbox-buttons button,.jquery-msgbox-buttons input {
+	cursor: pointer;
+	margin-left: 10px;
+	min-width: 65px;
+}
+
+.jquery-msgbox-inputs {
+	margin-top: 4px;
+}
+
+.jquery-msgbox-inputs input {
+	border: 1px solid #DDDDDD;
+	display: block;
+	margin: 3px 0 6px;
+	padding: 3px 2px;
+	width: 95%;
+	position: relative;
+}
+
+.jquery-msgbox-label {
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.jquery-msgbox-close .ico_close {
+	position: absolute;
+	right: 2px;
+	font-weight: bold;
+	color: #888;
+	cursor: pointer;
+	font-size: 18px;
+	font-family: Airal;
+	outline:0;
+	text-decoration: none;
+}
+
+
+.jquery-msgbox-alert {
+	background: url("../images2/msg.alert.png") no-repeat scroll	rgba(0, 0, 0, 0);
+}
+
+.jquery-msgbox-info {
+	background: url("../images2/msg.info.png") no-repeat scroll
+		rgba(0, 0, 0, 0);
+}
+
+.jquery-msgbox-error {
+	background: url("../images2/msg.error.png") no-repeat scroll
+		rgba(0, 0, 0, 0);
+}
+
+.jquery-msgbox-prompt {
+	background: url("../images2/msg.question.png") no-repeat scroll
+		rgba(0, 0, 0, 0);
+}
+
+.jquery-msgbox-confirm {
+	background: url("../images2/msg.confirm.png") no-repeat scroll
+		rgba(0, 0, 0, 0);
+}

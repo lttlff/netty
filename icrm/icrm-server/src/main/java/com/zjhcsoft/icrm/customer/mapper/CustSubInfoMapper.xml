@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.customer.mapper.CustSubInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.customer.domain.CustSubInfo" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+    <result column="REG_TYPE" property="regType" jdbcType="INTEGER" />
+    <result column="REG_NBR" property="regNbr" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, CUST_ID, REG_TYPE, REG_NBR
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_cust_sub_info
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from crm_cust_sub_info
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.customer.domain.CustSubInfo" >
+    insert into crm_cust_sub_info (ROW_ID, CUST_ID, REG_TYPE, 
+      REG_NBR)
+    values (#{rowId,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, #{regType,jdbcType=INTEGER}, 
+      #{regNbr,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.customer.domain.CustSubInfo" >
+    insert into crm_cust_sub_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="regType != null" >
+        REG_TYPE,
+      </if>
+      <if test="regNbr != null" >
+        REG_NBR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="regType != null" >
+        #{regType,jdbcType=INTEGER},
+      </if>
+      <if test="regNbr != null" >
+        #{regNbr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.customer.domain.CustSubInfo" >
+    update crm_cust_sub_info
+    <set >
+      <if test="custId != null" >
+        CUST_ID = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="regType != null" >
+        REG_TYPE = #{regType,jdbcType=INTEGER},
+      </if>
+      <if test="regNbr != null" >
+        REG_NBR = #{regNbr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.customer.domain.CustSubInfo" >
+    update crm_cust_sub_info
+    set CUST_ID = #{custId,jdbcType=VARCHAR},
+      REG_TYPE = #{regType,jdbcType=INTEGER},
+      REG_NBR = #{regNbr,jdbcType=VARCHAR}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getCustSubInfoListByCustId"
+  	resultMap="BaseResultMap"
+  >
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from crm_cust_sub_info
+  	where cust_id = #{custId,jdbcType=VARCHAR}
+  </select>
+  
+  
+</mapper>

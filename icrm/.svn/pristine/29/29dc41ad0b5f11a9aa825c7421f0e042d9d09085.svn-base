@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjhcsoft.icrm.customer.mapper.AddrMapper" >
+  <resultMap id="BaseResultMap" type="com.zjhcsoft.icrm.customer.domain.Addr" >
+    <id column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_PERSON" property="lastPerson" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="TIMESTAMP" />
+    <result column="ADDR_CODE" property="addrCode" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="ADDR_SIMPLE" property="addrSimple" jdbcType="VARCHAR" />
+    <result column="ADDR_GRADE" property="addrGrade" jdbcType="INTEGER" />
+    <result column="PARENT_ADDR_ID" property="parentAddrId" jdbcType="VARCHAR" />
+    <result column="POST_CODE" property="postCode" jdbcType="VARCHAR" />
+    <result column="STS" property="sts" jdbcType="INTEGER" />
+    <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+    <result column="ADDR_LEVEL" property="addrLevel" jdbcType="INTEGER" />
+    <result column="ADDR_FULL" property="addrFull" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROW_ID, CREATE_PERSON, CREATE_DATE, LAST_PERSON, LAST_DATE, ADDR_CODE, ADDRESS, ADDR_SIMPLE, 
+    ADDR_GRADE, PARENT_ADDR_ID, POST_CODE, STS, STS_DATE, ADDR_LEVEL, ADDR_FULL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_addr
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from crm_addr
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjhcsoft.icrm.customer.domain.Addr" >
+    insert into crm_addr (ROW_ID, CREATE_PERSON, CREATE_DATE, 
+      LAST_PERSON, LAST_DATE, ADDR_CODE, 
+      ADDRESS, ADDR_SIMPLE, ADDR_GRADE, 
+      PARENT_ADDR_ID, POST_CODE, STS, 
+      STS_DATE, ADDR_LEVEL, ADDR_FULL
+      )
+    values (#{rowId,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastPerson,jdbcType=VARCHAR}, #{lastDate,jdbcType=TIMESTAMP}, #{addrCode,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{addrSimple,jdbcType=VARCHAR}, #{addrGrade,jdbcType=INTEGER}, 
+      #{parentAddrId,jdbcType=VARCHAR}, #{postCode,jdbcType=VARCHAR}, #{sts,jdbcType=INTEGER}, 
+      #{stsDate,jdbcType=TIMESTAMP}, #{addrLevel,jdbcType=INTEGER}, #{addrFull,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjhcsoft.icrm.customer.domain.Addr" >
+    insert into crm_addr
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        ROW_ID,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="addrCode != null" >
+        ADDR_CODE,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="addrSimple != null" >
+        ADDR_SIMPLE,
+      </if>
+      <if test="addrGrade != null" >
+        ADDR_GRADE,
+      </if>
+      <if test="parentAddrId != null" >
+        PARENT_ADDR_ID,
+      </if>
+      <if test="postCode != null" >
+        POST_CODE,
+      </if>
+      <if test="sts != null" >
+        STS,
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE,
+      </if>
+      <if test="addrLevel != null" >
+        ADDR_LEVEL,
+      </if>
+      <if test="addrFull != null" >
+        ADDR_FULL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addrCode != null" >
+        #{addrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addrSimple != null" >
+        #{addrSimple,jdbcType=VARCHAR},
+      </if>
+      <if test="addrGrade != null" >
+        #{addrGrade,jdbcType=INTEGER},
+      </if>
+      <if test="parentAddrId != null" >
+        #{parentAddrId,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=INTEGER},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addrLevel != null" >
+        #{addrLevel,jdbcType=INTEGER},
+      </if>
+      <if test="addrFull != null" >
+        #{addrFull,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjhcsoft.icrm.customer.domain.Addr" >
+    update crm_addr
+    <set >
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPerson != null" >
+        LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addrCode != null" >
+        ADDR_CODE = #{addrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addrSimple != null" >
+        ADDR_SIMPLE = #{addrSimple,jdbcType=VARCHAR},
+      </if>
+      <if test="addrGrade != null" >
+        ADDR_GRADE = #{addrGrade,jdbcType=INTEGER},
+      </if>
+      <if test="parentAddrId != null" >
+        PARENT_ADDR_ID = #{parentAddrId,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        POST_CODE = #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        STS = #{sts,jdbcType=INTEGER},
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE = #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addrLevel != null" >
+        ADDR_LEVEL = #{addrLevel,jdbcType=INTEGER},
+      </if>
+      <if test="addrFull != null" >
+        ADDR_FULL = #{addrFull,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjhcsoft.icrm.customer.domain.Addr" >
+    update crm_addr
+    set CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      LAST_PERSON = #{lastPerson,jdbcType=VARCHAR},
+      LAST_DATE = #{lastDate,jdbcType=TIMESTAMP},
+      ADDR_CODE = #{addrCode,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      ADDR_SIMPLE = #{addrSimple,jdbcType=VARCHAR},
+      ADDR_GRADE = #{addrGrade,jdbcType=INTEGER},
+      PARENT_ADDR_ID = #{parentAddrId,jdbcType=VARCHAR},
+      POST_CODE = #{postCode,jdbcType=VARCHAR},
+      STS = #{sts,jdbcType=INTEGER},
+      STS_DATE = #{stsDate,jdbcType=TIMESTAMP},
+      ADDR_LEVEL = #{addrLevel,jdbcType=INTEGER},
+      ADDR_FULL = #{addrFull,jdbcType=VARCHAR}
+    where ROW_ID = #{rowId,jdbcType=VARCHAR}
+  </update>
+</mapper>

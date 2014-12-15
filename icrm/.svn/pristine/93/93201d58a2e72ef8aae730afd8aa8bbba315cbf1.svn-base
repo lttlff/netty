@@ -1,0 +1,110 @@
+package com.zjhcsoft.rbac.user.service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.zjhcsoft.common.mapper.PageMapper;
+import com.zjhcsoft.common.page.Page;
+import com.zjhcsoft.common.util.CommonUtil;
+import com.zjhcsoft.common.util.JsonUtil;
+import com.zjhcsoft.common.util.ResponseEnvelope;
+import com.zjhcsoft.common.util.UUIDGenerator;
+import com.zjhcsoft.rbac.user.domain.User;
+import com.zjhcsoft.rbac.user.mapper.UserMapper;
+import com.zjhcsoft.rpc.context.impl.Request;
+
+@Service
+public class UserService {
+
+	@Autowired
+	private UserMapper userMapper;
+	@Autowired
+	private PageMapper pageMapper;
+	
+	@Autowired
+	private JsonUtil jsonUtil;
+
+	public List<User> getUserPageList(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", Request.getAttribute("start"));
+		map.put("limit", Request.getAttribute("limit"));
+		User user = (User) Request.getAttribute("domain");
+		CommonUtil.filterToSelect(user);
+		map.put("domain", user);
+		List<User>  list =  userMapper.getList(map);
+		return list;
+	}
+	public long getUserTotalCount(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		User user = (User) Request.getAttribute("domain");
+		CommonUtil.filterToSelect(user);
+		map.put("domain", user);
+		return userMapper.getTotalSize(map);
+	}
+	
+	public  ResponseEnvelope<User> getUserListByPage() {
+		Map<String,Object> map = new HashMap<String,Object> ();
+		map.put("start", Request.getAttribute("start"));
+		map.put("limit",Request.getAttribute("limit"));
+		ResponseEnvelope<User> re = new ResponseEnvelope<User>();
+		re.setList(userMapper.getList(map));
+		re.setTotalSize(userMapper.getTotalSize(map));
+		return re;
+	}
+	
+	public  ResponseEnvelope deleteByPrimaryKey(){
+		String id = (String) Request.getAttribute("id");
+		ResponseEnvelope<Object> re = new ResponseEnvelope<Object>();
+
+		try {
+			int i = userMapper.deleteByPrimaryKey(id);
+			re.setSuccess(true);
+			re.setMessage("删除成功!");
+		} catch (Exception e) {
+			re.setSuccess(false);
+			re.setMessage(re.getMessage());
+		}
+		return re;
+	}
+
+	public User selectByUserNameAndPsw(){
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("userName", (String) Request.getAttribute("userName"));
+		map.put("userPsw", (String) Request.getAttribute("userPsw"));
+		return userMapper.selectByUserNameAndPsw(map);
+	}
+	
+	
+	public ResponseEnvelope insertOrUpdate(){
+		User user = (User) Request.getAttribute("user");
+		ResponseEnvelope<Object> re = new ResponseEnvelope<Object>();
+		
+		try {
+			if (StringUtils.isEmpty(user.getRowId())) {
+				user.setRowId(UUIDGenerator.getUUID());
+				userMapper.insert(user);
+			} else {
+				userMapper.updateByPrimaryKeySelective(user);
+			}
+			re.setMessage("保存成功!");
+			re.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			re.setMessage(e.getMessage());
+			re.setSuccess(false);
+		}
+		return re;
+	}
+	
+    public User selectByPrimaryKey(){
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	return userMapper.selectByPrimaryKey((String) Request.getAttribute("id"));
+    }
+
+	
+}

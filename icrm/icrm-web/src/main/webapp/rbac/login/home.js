@@ -1,0 +1,70 @@
+$(document).ready(function() {
+	
+	//显示第一级主菜单的二级菜单
+	$('.header .nav_sub:first').css('display','block');
+	
+	var $bodyLocation = $("#bodyLocation");
+	
+	//一级菜单点击事件
+	$('.header .nav_list li').bind('click mouseover', function() {
+				var $li = $(this);
+				$li.addClass('cur')
+					.siblings().removeClass('cur');
+					
+				$('#menu_sub_'+$li.attr('id')).css('display','block')
+					.siblings('.nav_sub').css('display','none')
+					.find('.nav_sub_list').css('display','none');
+				
+				$('.header .nav_sub a').removeClass('cur');//三级菜单取消激活样式
+	});
+
+	$('.header .nav_sub a').bind({//二级菜单
+				mouseover : function() {
+					var $li = $(this).parent('li');
+					$li.find('ul').fadeIn(600);
+					$li.siblings().find("ul").css('display','none');
+					$li.find('a').removeClass('cur');
+				},
+				click:function(){
+					$(this).addClass("cur")
+						.parent('li').siblings().find('a').removeClass("cur");
+					loadNewBody($(this).parent('li'));
+				}
+			});
+			
+	$('.header .nav_sub_list li').bind({
+				mouseover : function(e) {
+					$(this).siblings('ul').css('display', 'block');
+				},
+				click : function(e) {// 三级菜单点击
+					$('.header .nav_sub_list').css('display', 'none');
+					loadNewBody($(this));
+				}
+			});
+	$('.header .nav_sub_list').bind({
+				mouseout:function(){
+					$(this).css('display', 'none');;
+				},
+				mouseover : function(e) {
+					$(this).css('display', 'block');;
+				}
+			});
+	
+	//退出		
+	$("#logout").bind('click',function(){
+		window.location.href=basePath+"/logout.do";
+	});
+			
+	
+	var $bodyFrame = $("#bodyFrame");
+	var loadNewBody = function( $li){
+		if($li.attr("menuUrl")==""){
+			$bodyLocation.html($li.attr("menuDesc"));	
+			$bodyFrame.attr("src","http://www.baidu.com");
+		}else{
+			$bodyLocation.html($li.attr("menuDesc"));	
+			$bodyFrame.attr("src",basePath+$li.attr("menuUrl"));
+		}
+	}
+	
+});
